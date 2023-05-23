@@ -4,11 +4,11 @@ Project and repository created on May 18, 2023.
 
 # Version History
 
-## Version 0.1.1 | May 19, 2023
+## Version 0.1.1 | Published May 19, 2023
 - Setup sample scene
 - Added a shader to cover all points below a gradient (for a future water line at the water surface)
 
-## Version 0.1.2 | May 22, 2023
+## Version 0.1.2 | Published May 22, 2023
 - Created a basic “example level” testing scene (replacing sample scene)
 - Added a basic environment with materials for floor, walls, etc.
 - Added a door which can animate sliding open .
@@ -18,3 +18,9 @@ Project and repository created on May 18, 2023.
 - Added checkpoint/interaction placeholders.
 - Added player placeholder.
 - Updated volume profile.
+
+## Version 0.1.3 | Published May 23, 2023
+- Started working on fullscreen render pass shader for underwater fog. In-progress:
+  - zDepth-based opacity based using a custom cubic function
+- Minor renaming/reorganization to files/assets
+- Minor changes to test level

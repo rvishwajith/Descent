@@ -16,3 +16,5 @@ Project and repository created on May 18, 2023.
 - Added emissive lanterns which can flicker on/off with intervals and intensity.
 - Added UI and post-processing VFX placeholders.
 - Added checkpoint/interaction placeholders.
+- Added player placeholder.
+- Updated volume profile.

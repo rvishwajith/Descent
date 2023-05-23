@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 491359258862220412}
   - component: {fileID: 461188525034874447}
   m_Layer: 0
-  m_Name: Sliding Door
+  m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ Transform:
   m_Children:
   - {fileID: 6730272199940319516}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &461188525034874447
 MonoBehaviour:
@@ -106,7 +106,7 @@ PrefabInstance:
     - target: {fileID: 6694662053113035649, guid: d412763b7a5664f288870b66e5a9eeee,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.125
+      value: -3.6
       objectReference: {fileID: 0}
     - target: {fileID: 6694662053113035649, guid: d412763b7a5664f288870b66e5a9eeee,
         type: 3}
@@ -185,7 +185,7 @@ PrefabInstance:
     - target: {fileID: 6694662053113035649, guid: d412763b7a5664f288870b66e5a9eeee,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.125
+      value: 3.6
       objectReference: {fileID: 0}
     - target: {fileID: 6694662053113035649, guid: d412763b7a5664f288870b66e5a9eeee,
         type: 3}

@@ -7,8 +7,8 @@ public class Door : MonoBehaviour
     public Transform left;
 
     private bool opening = false, didOpen = false;
-    private float openStartTime = -1, openAnimTime = 5;
-    private float startPosX = 0.125f, endPosX = 3.9f;
+    private float openStartTime = -1, openAnimTime = 6;
+    private float startPosX = 0.05f, endPosX = 3.6f;
 
     public void Start()
     {
@@ -17,22 +17,29 @@ public class Door : MonoBehaviour
 
     public void Open()
     {
+        if (opening || didOpen)
+        {
+            Debug.Log("Door.Open() - Ignoring, door is opening or open.");
+            return;
+        }
         Debug.Log("Door.Open() - Started opening.");
         opening = true;
         openStartTime = Time.time;
-
     }
 
     public void DidOpen()
     {
         Debug.Log("Door.DidOpen() - Finished opening.");
         didOpen = true;
+        opening = false;
     }
 
     public void Update()
     {
-        if (!opening || didOpen) { return; }
-
+        if (!opening || didOpen)
+        {
+            return;
+        }
         if (opening && !didOpen) { OpeningAnimation(); }
     }
 

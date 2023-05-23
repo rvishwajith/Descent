@@ -21,6 +21,22 @@ Project and repository created on May 18, 2023.
 
 ## Version 0.1.3 | Published May 23, 2023
 - Started working on fullscreen render pass shader for underwater fog. In-progress:
-  - zDepth-based opacity based using a custom cubic function
+  - Fog opacity using a custom cubic function with linear (0-1) z-depth
 - Minor renaming/reorganization to files/assets
 - Minor changes to test level
+
+## Version 0.1.4 | Published May 23, 2023
+- Successful (partial) underwater fog render pass:
+  - Fog opacity using cubic function now calculated/applied properly.
+  - Fog still does not have a seperate value for falloff distance (uses camera zFar).
+- Started working on player controller.
+- Added AnimationSpline interpolation calculator script.
+- (Not working) Added placeholder mesh for procedural mesh animation using a spline.
+- Added placeholder UI for interacting with a checkpoint.
+
+## Version 0.1.5 | In-progress
+- Added underwater fog render pass features:
+  - Fog opacity has a seperate adjustable value for falloff distance.
+  - Fog color now changes based on the y-depth of the camera using a gradient.
+- Added frame rate calculator.
+- More work on spline interpolation for procedural mesh animation of large creatures.

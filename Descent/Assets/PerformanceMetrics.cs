@@ -7,7 +7,6 @@ public class PerformanceMetrics : MonoBehaviour
     [Header("Label (TextMeshPro)")]
     public TextMeshProUGUI label;
 
-
     FrameRateCalculator calculator = null;
 
     void Start()

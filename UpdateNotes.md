@@ -42,8 +42,19 @@ Project and repository created on May 18, 2023.
 - More work on spline interpolation for procedural mesh animation.
 
 ## Version 0.1.6 | In-progress
-- Added underwater fog render pass features:
+- Spline interpolation for procedural mesh animation now works properly (using 1 catmull rom spline)
+  - Scaling spline down to initial mesh length still incomplete
+- Added universal static Interpolate for all custom lerps (from 0 to 1):
+  - Splines:
+    - Catmull-rom position, forward, x/y tangents
+  - Polynomials:
+    - Quadratic
+    - Cubic
+  - Other
+    - Smoothstep
+    - Ease (ease in/out/in-out)
+
+## Version 0.1.7 | Planned
+- New underwater fog render pass features:
   - Fog opacity has a seperate adjustable value for falloff distance.
   - Fog color now changes based on the y-depth of the camera using a gradient.
-- More work on spline interpolation for procedural mesh animation.
-

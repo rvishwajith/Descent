@@ -34,9 +34,16 @@ Project and repository created on May 18, 2023.
 - (Not working) Added placeholder mesh for procedural mesh animation using a spline.
 - Added placeholder UI for interacting with a checkpoint.
 
-## Version 0.1.5 | In-progress
+## Version 0.1.5 | Published May 23, 2022.
+- Added performance metrics calculator (currently only FPS):
+  - Displays average FPS on a label (supports min/max samples and rounding).
+- Added Attributions.md page.
+- Minor reorganization / renaming.
+- More work on spline interpolation for procedural mesh animation.
+
+## Version 0.1.6 | In-progress
 - Added underwater fog render pass features:
   - Fog opacity has a seperate adjustable value for falloff distance.
   - Fog color now changes based on the y-depth of the camera using a gradient.
-- Added frame rate calculator.
-- More work on spline interpolation for procedural mesh animation of large creatures.
+- More work on spline interpolation for procedural mesh animation.
+

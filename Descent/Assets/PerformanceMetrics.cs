@@ -11,13 +11,13 @@ public class PerformanceMetrics : MonoBehaviour
 
     void Start()
     {
-        Application.targetFrameRate = 120;
+        // Application.targetFrameRate = 120;
         calculator = new();
     }
 
     void Update()
     {
-        calculator.Update(Time.time);
+        calculator.Update(Time.deltaTime);
     }
 
     void OnGUI()
@@ -30,10 +30,10 @@ class FrameRateCalculator
 {
     private Queue<float> times;
     private int maxSamples = 400, minSamples = 60;
-    private int maxDecimals = 2;
 
     public FrameRateCalculator()
     {
+        Debug.Log("Performance Metrics: Calculating FPS.");
         times = new();
     }
 
@@ -55,7 +55,7 @@ class FrameRateCalculator
             sumDeltaT += deltaT;
         }
         float meanDeltaT = sumDeltaT / numSamples;
-        float meanFPS = 1 / meanDeltaT;
+        float meanFPS = 1f / meanDeltaT;
         return meanFPS;
     }
 
@@ -63,11 +63,16 @@ class FrameRateCalculator
     {
         if (times.Count < minSamples)
         {
-            return "... FPS";
+            return "FPS: N/A";
         }
-        int castScale = (int)Mathf.Pow(10, maxDecimals);
-        int fpsScaled = (int)(AverageFPS() * castScale);
-        float fpsRounded = (float)(fpsScaled / castScale);
-        return fpsRounded + " FPS";
+
+        return "FPS: " + RoundFloat(AverageFPS(), 2);
+    }
+
+    public float RoundFloat(float value, int decimals)
+    {
+        int scaledValue = (int)(value * Mathf.Pow(10, decimals));
+        float fpsRounded = (float)scaledValue / Mathf.Pow(10, decimals);
+        return fpsRounded;
     }
 }

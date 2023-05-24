@@ -1,17 +1,19 @@
 # Update Notes
 
-Project and repository created on May 18, 2023.
+## Version 0 | Published May 18, 2023.
+Repository, unity project, etc. created.
 
 # Version History
 
 ## Version 0.1.1 | Published May 19, 2023
-- Setup sample scene
-- Added a shader to cover all points below a gradient (for a future water line at the water surface)
+- Set up sample scene.
+- Added a shader to cover all points below a gradient:
+  - Will be used for a future water line at the water surface.
 
 ## Version 0.1.2 | Published May 22, 2023
 - Created a basic “example level” testing scene (replacing sample scene)
 - Added a basic environment with materials for floor, walls, etc.
-- Added a door which can animate sliding open .
+- Added a door which can animate sliding open.
 - Added an animated trigger object which can open a target door on interaction
 - Added emissive lanterns which can flicker on/off with intervals and intensity.
 - Added UI and post-processing VFX placeholders.
@@ -21,9 +23,9 @@ Project and repository created on May 18, 2023.
 
 ## Version 0.1.3 | Published May 23, 2023
 - Started working on fullscreen render pass shader for underwater fog. In-progress:
-  - Fog opacity using a custom cubic function with linear (0-1) z-depth
-- Minor renaming/reorganization to files/assets
-- Minor changes to test level
+  - Fog opacity using a custom cubic function with linear (0-1) z-depth.
+- Minor renaming/reorganization to files/assets.
+- Minor changes to test level.
 
 ## Version 0.1.4 | Published May 23, 2023
 - Successful (partial) underwater fog render pass:
@@ -43,7 +45,7 @@ Project and repository created on May 18, 2023.
 
 ## Version 0.1.6 | In-progress
 - Spline interpolation for procedural mesh animation now works properly (using 1 catmull rom spline)
-  - Scaling spline down to initial mesh length still incomplete
+  - Scaling spline down to initial mesh length still incomplete.
 - Added universal static Interpolate for all custom lerps (from 0 to 1):
   - Splines:
     - Catmull-rom position, forward, x/y tangents

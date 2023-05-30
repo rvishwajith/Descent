@@ -27,18 +27,14 @@ public class DoorTrigger : MonoBehaviour
         animationTarget.localEulerAngles = new Vector3(xRotation, yRotation, zRotation);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Collided: " + collision.collider.transform.name);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Triggered: " + other.transform.name);
+        // Debug.Log("Triggered: " + other.transform.name);
+        Activate();
     }
 
     void Activate()
     {
-        doorTarget.GetComponent<Door>().Open();
+        doorTarget.GetComponent<Door>().Open(1.5f);
     }
 }

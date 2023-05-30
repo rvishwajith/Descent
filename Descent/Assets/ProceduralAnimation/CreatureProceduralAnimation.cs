@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class CreatureProceduralAnimation : MonoBehaviour
 {
-    [Header("Spline")]
     private AnimationSpline spline;
     private Mesh mesh;
     private Vector3[]
@@ -50,14 +49,14 @@ public class CreatureProceduralAnimation : MonoBehaviour
 
 public class AnimationSpline
 {
-    Transform pointA, pointB, pointC, pointD;
+    private Transform pointA, pointB, pointC, pointD;
 
-    public AnimationSpline(Transform splineObject)
+    public AnimationSpline(Transform spline)
     {
-        pointA = splineObject.Find("Start");
-        pointB = splineObject.Find("1");
-        pointC = splineObject.Find("2");
-        pointD = splineObject.Find("End");
+        pointA = spline.Find("Start");
+        pointB = spline.Find("1");
+        pointC = spline.Find("2");
+        pointD = spline.Find("End");
     }
 
     public static Vector3 TangentX(Vector3 forward)
@@ -84,8 +83,22 @@ public class AnimationSpline
             p0 = pointA.localPosition,
             p1 = pointB.localPosition,
             p2 = pointC.localPosition,
-            p3 = pointD.localPosition;
+            p3 = pointD.localPosition,
+            a = 2 * p1,
+            b = (-1 * p0 + p2) * t,
+            c = (2 * p0 - 5 * p1 + 4 * p2 - p3) * t * t,
+            d = (-1 * p0 + 3 * p1 - 3 * p2 + p3) * t * t * t,
+            point = 0.5f * (a + b + c + d);
+        return point;
+    }
+
+    public Vector3 PositionGlobal(float t)
+    {
         Vector3
+            p0 = pointA.position,
+            p1 = pointB.position,
+            p2 = pointC.position,
+            p3 = pointD.position,
             a = 2 * p1,
             b = (-1 * p0 + p2) * t,
             c = (2 * p0 - 5 * p1 + 4 * p2 - p3) * t * t,
@@ -97,15 +110,14 @@ public class AnimationSpline
     public void DrawGizmo()
     {
         float t = 0f, tInterval = 0.02f;
-
         while (t < 1 - tInterval)
         {
             float startT = t, endT = startT + tInterval;
             if (endT > 1) Debug.Log("AnimationSpline.DrawGizmos() ISSUE: EdgeEnd > 1 (value: " + endT + ")");
             t += tInterval;
 
-            Vector3 start = Position(startT), end = Position(endT);
-            Gizmos.color = Color.Lerp(Color.yellow, Color.cyan, t);
+            Vector3 start = PositionGlobal(startT), end = PositionGlobal(endT);
+            Gizmos.color = Color.Lerp(Color.cyan, Color.red, t);
             Gizmos.DrawLine(start, end);
             // Vector3 forward = start - end;
             // Gizmos.DrawLine(start, TangentX(forward) + start);

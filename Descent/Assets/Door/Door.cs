@@ -7,15 +7,21 @@ public class Door : MonoBehaviour
     public Transform left;
 
     private bool opening = false, didOpen = false;
-    private float openStartTime = -1, openAnimTime = 6;
+    private float openStartTime = -1, openAnimTime = 6.3f;
     private float startPosX = 0.05f, endPosX = 3.6f;
 
     public void Start()
     {
-        Open();
+        Close();
     }
 
-    public void Open()
+    public void Close()
+    {
+        right.localPosition = new(startPosX, right.localPosition.y, right.localPosition.z);
+        left.localPosition = new(-startPosX, left.localPosition.y, left.localPosition.z);
+    }
+
+    public void Open(float delay)
     {
         if (opening || didOpen)
         {
@@ -23,8 +29,14 @@ public class Door : MonoBehaviour
             return;
         }
         Debug.Log("Door.Open() - Started opening.");
-        opening = true;
-        openStartTime = Time.time;
+        openStartTime = Time.time + delay;
+    }
+
+    void PlayOpeningSound()
+    {
+        var audioSource = transform.GetComponent<AudioSource>();
+        audioSource.loop = false;
+        audioSource.Play();
     }
 
     public void DidOpen()
@@ -36,11 +48,19 @@ public class Door : MonoBehaviour
 
     public void Update()
     {
-        if (!opening || didOpen)
+        if (!opening)
         {
-            return;
+            if (didOpen) return;
+            else if (openStartTime > 0 && Time.time > openStartTime)
+            {
+                opening = true;
+                PlayOpeningSound();
+            }
         }
-        if (opening && !didOpen) { OpeningAnimation(); }
+        else // Opening
+        {
+            if (!didOpen) OpeningAnimation();
+        }
     }
 
     public void OpeningAnimation()

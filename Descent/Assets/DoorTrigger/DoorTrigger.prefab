@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6717806654586199430}
   - component: {fileID: 1433112437197168021}
   - component: {fileID: 4816609934808322526}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Orb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 5759540739703492376}
   - component: {fileID: 4103111830974712243}
   - component: {fileID: 2833406463630686312}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Orb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 7988261326981206494}
   - component: {fileID: 5567849091282737330}
   - component: {fileID: 1111332562717123863}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Orb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 6117793455175935858}
   - component: {fileID: 2508289598235411223}
   - component: {fileID: 4756021817228797089}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Orb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 8285074728451031982}
   - component: {fileID: 3901789398338870163}
   - component: {fileID: 4453102262112982613}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Center Orb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -521,7 +521,7 @@ GameObject:
   - component: {fileID: 8273389602678198437}
   - component: {fileID: 1738335974341283379}
   - component: {fileID: 4584888177739705000}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Orb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -625,7 +625,7 @@ GameObject:
   - component: {fileID: 3422346699106891995}
   - component: {fileID: 751785969726901220}
   - component: {fileID: 3594144862011264838}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DoorTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -646,7 +646,7 @@ Transform:
   m_Children:
   - {fileID: 5990308891634334089}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &751785969726901220
 MonoBehaviour:
@@ -677,11 +677,11 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7584515729273605499
 GameObject:
@@ -695,7 +695,7 @@ GameObject:
   - component: {fileID: 34023247392390123}
   - component: {fileID: 5273397669628895702}
   - component: {fileID: 3706378360020007207}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Orb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -797,7 +797,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5990308891634334089}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Animation
   m_TagString: Untagged
   m_Icon: {fileID: 0}

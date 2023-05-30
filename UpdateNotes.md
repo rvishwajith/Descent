@@ -50,31 +50,41 @@ Repository, unity project, etc. created.
   - Splines:
     - Catmull-rom position, forward, x/y tangents
   - Polynomials:
+    - Linear
     - Quadratic
     - Cubic
-  - Other
-    - Smoothstep
-    - Ease (ease in/out/in-out)
-
-## Version 0.1.7 | In-progress
-- Added prefabs for frame rate / debugging.
-- Some renaming/reorganization.
 - Added TextMeshPro package.
+
+# Major Change - Version 0.2
+
+## Version 0.2
+- Added (N^2) boids behaviour:
+  - Center of mass
+  - Match velocity
+  - Avoidance from:
+    - Other boids
+    - Obstacle colliders
+    - Player
+    - Predators
+- Added path history script.
+- Added camera controller:
+  - Can follow any target with a path history
+- Added smoke stacks and smoke particle VFX
+- Created a player prefab
+- Added a player controller with:
+  - Adjustable rotation speed, max speed, boosting, acceleration
+  - No touch controls yet only mouse controls
+  - Changeable player states (idle, swimming, boost, etc.)
+  - Collision detection
+- Some renaming/reorganization and a test scene for VFX.
 - Added a movement target gizmo with adjustable position/direction.
 - Fixed a bug where the animation spline used global position instead of local position.
-- Started working on a target following script for large creatures that adds snake-like movement:
-  - Each spline point is a segment
-  - Distance between each segment is fixed
-  - Look at and move towards previous segment (except head)
-  - Head copies creature position (with some offset)
-
-## Future Plans
-- Testing for procedural animation on actual meshes.
-- Underwater fog render pass features:
-  - Fog opacity has a seperate adjustable value for falloff distance.
-  - Fog color now changes based on the y-depth of the camera using a gradient.
-- When a door opens:
-  - Play a sound.
-  - Add particle system (and a second particle system for when the door finishes opening).
-- Add ambient music.
-- Add mouse-based controls to player controller.
+- Added incomplete procedural animations for the Manta ray (in C#)
+- Door trigger now opens door on player collision
+- Added ambient sounds and door opening sounds
+- Started working on a snake-style target following script for large creatures:
+  - Each spline point is a segment.
+  - Distance between each segment is fixed.
+  - Look at and move towards previous segment (except head).
+  - Head copies creature position (with some offset).
+- Added y-depth based fog color changing to global fullscreen shader.

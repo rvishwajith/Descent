@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
 {
     public Transform target = null;
     private bool hasPathHistory = false;
-    private PathHistory pathHistory = null;
+    private CreaturePathHistory pathHistory = null;
 
     private Vector3
         lensPosTarget,
@@ -22,10 +22,10 @@ public class CameraController : MonoBehaviour
 
     void SetTarget(Transform target)
     {
-        if (target.TryGetComponent<PathHistory>(out pathHistory))
+        if (target.TryGetComponent<CreaturePathHistory>(out pathHistory))
         {
             hasPathHistory = true;
-            Debug.Log("CameraController.SetTarget() - Target has a path history.");
+            // Debug.Log("CameraController.SetTarget() - Target has a path history.");
             this.target = target;
         }
         else
@@ -36,8 +36,8 @@ public class CameraController : MonoBehaviour
 
         if (target.name.Replace(" ", "") == "MantaRay")
         {
-            this.GetComponent<UpdateUIElements>().SetLabel("SpeciesEnglish", "Giant Oceanic Manta Ray");
-            this.GetComponent<UpdateUIElements>().SetLabel("SpeciesLatin", "Mobula Birostris");
+            // this.GetComponent<UpdateUIElements>().SetLabel("SpeciesEnglish", "Giant Oceanic Manta Ray");
+            // this.GetComponent<UpdateUIElements>().SetLabel("SpeciesLatin", "Mobula Birostris");
         }
     }
 

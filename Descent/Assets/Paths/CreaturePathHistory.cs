@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathHistory : MonoBehaviour
+public class CreaturePathHistory : MonoBehaviour
 {
-    [Header("Follow Distance")]
     public float maxLength = 5f; // In meters, 5 by default.
 
     private LinkedList<Vector3> positions = new(); // Oldest position is first.
     private float
-        minSampleInterval = 0.03f, // In meters/second.
+        minSampleInterval = 0.05f, // In meters/second.
         length; // In meters, gets set in Start().
     private int maxSamples = 1000;
 
@@ -22,7 +21,7 @@ public class PathHistory : MonoBehaviour
         }
         positions.AddLast(transform.position);
         length = maxLength;
-        Debug.Log("PathHistory.Start(): Positions - " + positions.Count + ", Oldest = " + positions.First.Value + ", Newest = " + positions.Last.Value);
+        // Debug.Log("PathHistory.Start(): Positions - " + positions.Count + ", Oldest = " + positions.First.Value + ", Newest = " + positions.Last.Value);
     }
 
     private void OnDrawGizmos()

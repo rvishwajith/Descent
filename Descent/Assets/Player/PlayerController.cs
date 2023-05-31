@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log(Time.fixedDeltaTime);
+        // Debug.Log(Time.fixedDeltaTime);
     }
 
     public float GetSpeed() { return speed; }

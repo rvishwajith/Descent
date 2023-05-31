@@ -1,7 +1,12 @@
 # Update Notes
 A complete version history is listed from newest-to-oldest.
 
-## Version 0.2.3 | In-progress
+## Version 0.2.3 | Published May 30, 2023
+- Made UI manager on Camera globally accesible and initialized at start.
+- Added the ability to hide/show labels.
+- Added a pause button (doesn't do anything currently).
+- Added an interact button to the UI (will be renamed) to toggle when entering/leaving a trigger zone to open the door.
+- Some renaming/reorganization + changed README description.
 
 ## Version 0.2.2 | Published May 30, 2023
 - Camera controller now has access to UI manager:

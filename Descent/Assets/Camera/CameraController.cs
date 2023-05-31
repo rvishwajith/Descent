@@ -11,18 +11,19 @@ public class CameraController : MonoBehaviour
     private CreaturePathHistory pathHistory = null;
     private Vector3 lensPosTarget, cameraPosTarget;
 
+    private UIInfoManager uiManager;
+
     void Start()
     {
+        this.uiManager = GetComponent<UIInfoManager>();
+
         if (target == null)
         {
-            Debug.Log("No target found!");
+            Debug.Log("CameraController.Start() - No target found.");
             return;
         }
-        else
-        {
-            SetTarget(target);
-            UpdateTargetPositions();
-        }
+        SetTarget(target);
+        UpdateTargetPositions();
     }
 
     void SetTarget(Transform target)
@@ -39,25 +40,23 @@ public class CameraController : MonoBehaviour
             pathHistory = null;
         }
         ShowTargetInfo();
-
-        if (target.name.Replace(" ", "") == "MantaRay")
-        {
-            // this.GetComponent<UpdateUIElements>().SetLabel("SpeciesEnglish", "Giant Oceanic Manta Ray");
-            // this.GetComponent<UpdateUIElements>().SetLabel("SpeciesLatin", "Mobula Birostris");
-        }
     }
 
     void ShowTargetInfo()
     {
         var targetName = target.name.Replace(" ", "").ToLower();
-        if (targetName == "mantaray")
+        if (targetName == "player")
         {
-            UIInfoManager uiManager;
-            if (transform.TryGetComponent<UIInfoManager>(out uiManager))
-            {
-                uiManager.SetLabelText("SpeciesEnglish", "Giant Oceanic Manta Ray");
-                uiManager.SetLabelText("SpeciesLatin", "Mobula Birostris");
-            }
+            Debug.Log("Following player - hiding species info.");
+            uiManager.SetLabelVisible("SpeciesEnglish", false);
+            uiManager.SetLabelVisible("SpeciesLatin", false);
+        }
+        else if (targetName == "mantaray") // is creature
+        {
+            uiManager.SetLabelVisible("SpeciesEnglish", true);
+            uiManager.SetLabelVisible("SpeciesLatin", true);
+            uiManager.SetLabelText("SpeciesEnglish", "Giant Oceanic Manta Ray");
+            uiManager.SetLabelText("SpeciesLatin", "Mobula Birostris");
         }
     }
 
@@ -75,10 +74,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
-    {
-        UpdateTargetPositions();
-    }
+    void FixedUpdate() { UpdateTargetPositions(); }
 
     void UpdateTargetPositions()
     {

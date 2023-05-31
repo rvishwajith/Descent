@@ -17,11 +17,8 @@ The main languages used in development are:
 ## Platforms
 The target platforms for release are **iOS**, **iPadOS**, & **macOS**. Standard mouse and touch input are used, so Android and Windows are possible release targets as well.
 
-### Update Notes
+## Update Notes
 An overview of the development update history can be found at **UpdateNotes.md**.
 
-## Platforms
-Contains shaders made with Shader Graph and is built for iOS and macOS.
-
-# Attributions
+## Attributions
 Attributions will be added soon and will be found at **Attributions.md**.

@@ -1,4 +1,4 @@
-![A screenshot showcasing Descent's development (v0.2.2).](https://github.com/rvishwajith/Descent/blob/ca988397603ce0a5b6627b8b2ab0a48c96856289/Thumbnails/latest.png)
+![A screenshot showcasing Descent's development (v0.2.2).](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/latest.png)
 
 # About
 Descent is an underwater exploration and puzzle game which I am solo-developing.

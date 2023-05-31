@@ -1,7 +1,9 @@
 # Update Notes
 A complete version history is listed from newest-to-oldest.
 
-## Version 0.2.2 | In-progress
+## Version 0.2.3 | In-progress
+
+## Version 0.2.2 | Published May 30, 2023
 - Camera controller now has access to UI manager:
   - Set the label on text for species' english and latin names.
 - Sound and camera files moved to their own folders.

@@ -2,9 +2,8 @@
 using UnityEngine;
 using TMPro;
 
-public class UpdateUIElements : MonoBehaviour
+public class UIInfoManager : MonoBehaviour
 {
-    [Header("Labels")]
     private Dictionary<string, TextMeshProUGUI> labels = new();
 
     private void Awake()
@@ -19,15 +18,14 @@ public class UpdateUIElements : MonoBehaviour
         return obj.GetComponent<TextMeshProUGUI>();
     }
 
-    public void SetLabel(string key, string value)
+    public void SetLabelText(string labelKey, string value)
     {
         TextMeshProUGUI label;
-        if (labels.TryGetValue(key, out label))
+        if (labels.TryGetValue(labelKey, out label))
         {
             label.text = value;
             return;
         }
-        Debug.Log("Set() - Couldn't find a label with key: " + key);
+        Debug.Log("Set() - Couldn't find a label with key: " + labelKey);
     }
 }
-

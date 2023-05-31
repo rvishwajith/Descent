@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector3
         rotationDir = new(0, 0, 0),
-        deadZone = new(0.3f, 0.2f, 0),
+        deadZone = new(0f, 0f, 0),
         rotationSpeed = new(40, 70, 0);
 
     private float // 1 m/s = 2.24 mph

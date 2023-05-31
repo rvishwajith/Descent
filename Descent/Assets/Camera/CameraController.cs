@@ -5,19 +5,24 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Transform target = null;
+
+    private int mode;
     private bool hasPathHistory = false;
     private CreaturePathHistory pathHistory = null;
-
-    private Vector3
-        lensPosTarget,
-        cameraPosTarget;
+    private Vector3 lensPosTarget, cameraPosTarget;
 
     void Start()
     {
-        SetTarget(target);
-        UpdateTargetPositions();
-        // transform.position = cameraPosTarget;
-        // transform.LookAt(lensPosTarget);
+        if (target == null)
+        {
+            Debug.Log("No target found!");
+            return;
+        }
+        else
+        {
+            SetTarget(target);
+            UpdateTargetPositions();
+        }
     }
 
     void SetTarget(Transform target)
@@ -33,11 +38,26 @@ public class CameraController : MonoBehaviour
             hasPathHistory = false;
             pathHistory = null;
         }
+        ShowTargetInfo();
 
         if (target.name.Replace(" ", "") == "MantaRay")
         {
             // this.GetComponent<UpdateUIElements>().SetLabel("SpeciesEnglish", "Giant Oceanic Manta Ray");
             // this.GetComponent<UpdateUIElements>().SetLabel("SpeciesLatin", "Mobula Birostris");
+        }
+    }
+
+    void ShowTargetInfo()
+    {
+        var targetName = target.name.Replace(" ", "").ToLower();
+        if (targetName == "mantaray")
+        {
+            UIInfoManager uiManager;
+            if (transform.TryGetComponent<UIInfoManager>(out uiManager))
+            {
+                uiManager.SetLabelText("SpeciesEnglish", "Giant Oceanic Manta Ray");
+                uiManager.SetLabelText("SpeciesLatin", "Mobula Birostris");
+            }
         }
     }
 
@@ -85,4 +105,13 @@ public class CameraController : MonoBehaviour
             Gizmos.DrawLine(target.position + target.forward * 1f + 0.5f * Vector3.up, transform.position);
         }
     }
+}
+
+public static class CameraModes
+{
+    public static int
+        FOLLOW_PLAYER = 0,
+        FOLLOW_CREATURE_SMALL = 1,
+        FOLLOW_CREATURE_LARGE = 2,
+        CUTSCENE = 3;
 }

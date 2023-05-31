@@ -1,5 +1,11 @@
 # Update Notes
-A complete version history is listed from latest-to-oldest.
+A complete version history is listed from newest-to-oldest.
+
+## Version 0.2.2 | In-progress
+- Camera controller now has access to UI manager:
+  - Set the label on text for species' english and latin names.
+- Sound and camera files moved to their own folders.
+- Added a thumbnails folder + thumbnail to README.
 
 ## Version 0.2.1 | Published May 30, 2023
 - Temporarily removed the deadzones from the player controller input.

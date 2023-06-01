@@ -1,4 +1,7 @@
-![A screenshot showcasing Descent's development (v0.2.2).](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/latest.png)
+![A screenshot of Descent's development (v0.2.4).](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/latest.png)
+**Above:** Play testing "observation mode" of a Manta Ray in Unity (v0.2.4).
+![A screenshot of the custom procedural animation system using splines.](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/spline-animation-demo.png)
+**Above:** Testing the custom procedural animation system using splines (v0.3.0).
 
 # About
 Descent is an underwater exploration and puzzle game which I am solo-developing.

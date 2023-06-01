@@ -43,7 +43,7 @@ public class CustomPath : MonoBehaviour
         if (Application.isEditor) points = transform.GetComponentsInChildren<Transform>()[1..];
         if (points.Length < 2) return;
 
-        Gizmos.color = Color.yellow;
+        Gizmos.color = Color.gray;
         float tInterval = 0.05f;
         for (var i = 0; i < points.Length; i++)
         {
@@ -76,9 +76,9 @@ public class CustomPath : MonoBehaviour
     {
         if (i >= points.Length)
         {
-            i -= points.Length;
+            i %= points.Length;
         }
-        else if (i < 0)
+        while (i < 0)
         {
             i += points.Length;
         }

@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 3170318159930769503}
   - component: {fileID: 5374820777385913038}
   m_Layer: 7
-  m_Name: MantaRay2
-  m_TagString: Untagged
+  m_Name: MantaRay
+  m_TagString: RideableCreature
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2412056493752175362
 MeshRenderer:

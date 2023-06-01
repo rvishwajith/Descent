@@ -53,6 +53,24 @@ public class PlayerController : MonoBehaviour
         {
             mode = MovementModes.IDLE;
         }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            SwitchTargets();
+        }
+    }
+
+    void SwitchTargets()
+    {
+        var allRideableCreatures = GameObject.FindGameObjectsWithTag("RideableCreature");
+        foreach (var creature in allRideableCreatures)
+        {
+            var distance = (transform.position - creature.transform.position).magnitude;
+            if (distance < 5)
+            {
+                Camera.main.GetComponent<CameraController>().SetTarget(creature.transform);
+            }
+        }
     }
 
     void HandleMovementMode()

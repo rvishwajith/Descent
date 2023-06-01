@@ -5,13 +5,15 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Transform target = null;
-
-    private int mode;
     private bool hasPathHistory = false;
     private CreaturePathHistory pathHistory = null;
     private Vector3 lensPosTarget, cameraPosTarget;
+    private Vector3 originalCameraPos;
 
     private UIInfoManager uiManager;
+
+    public int mode;
+    public float screenShakeStrength = 0f;
 
     void Start()
     {
@@ -26,7 +28,7 @@ public class CameraController : MonoBehaviour
         UpdateTargetPositions();
     }
 
-    void SetTarget(Transform target)
+    public void SetTarget(Transform target)
     {
         if (target.TryGetComponent<CreaturePathHistory>(out pathHistory))
         {
@@ -47,14 +49,11 @@ public class CameraController : MonoBehaviour
         var targetName = target.name.Replace(" ", "").ToLower();
         if (targetName == "player")
         {
-            Debug.Log("Following player - hiding species info.");
-            uiManager.SetLabelVisible("SpeciesEnglish", false);
-            uiManager.SetLabelVisible("SpeciesLatin", false);
+            uiManager.SetPanelVisible("SpeciesNamePanel", false);
         }
         else if (targetName == "mantaray") // is creature
         {
-            uiManager.SetLabelVisible("SpeciesEnglish", true);
-            uiManager.SetLabelVisible("SpeciesLatin", true);
+            uiManager.SetPanelVisible("SpeciesNamePanel", true);
             uiManager.SetLabelText("SpeciesEnglish", "Giant Oceanic Manta Ray");
             uiManager.SetLabelText("SpeciesLatin", "Mobula Birostris");
         }
@@ -62,16 +61,28 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.B) && target.name != "Player")
+        {
+            SetTarget(GameObject.Find("Player").transform);
+        }
         if (hasPathHistory)
         {
-            var currentCameraPos = transform.position;
-            var pos = Vector3.Lerp(currentCameraPos, cameraPosTarget, Time.deltaTime * 2);
-            transform.position = pos;
-
-            var currentLensPos = transform.position + transform.forward;
-            var lensPos = Vector3.Lerp(currentLensPos, lensPosTarget, Time.deltaTime * 2);
-            transform.LookAt(lensPos);
+            FollowPathHistory();
         }
+        ApplyScreenShake();
+    }
+
+    void FollowPathHistory()
+    {
+        var currentCameraPos = transform.position;
+        var pos = Vector3.Lerp(currentCameraPos, cameraPosTarget, Time.deltaTime * 2);
+        transform.position = pos;
+
+        var currentLensPos = transform.position + transform.forward;
+        var lensPos = Vector3.Lerp(currentLensPos, lensPosTarget, Time.deltaTime * 2);
+        transform.LookAt(lensPos);
+
+        originalCameraPos = transform.position;
     }
 
     void FixedUpdate() { UpdateTargetPositions(); }
@@ -100,6 +111,13 @@ public class CameraController : MonoBehaviour
             Gizmos.DrawLine(pathHistory.EndPoint(), transform.position);
             Gizmos.DrawLine(target.position + target.forward * 1f + 0.5f * Vector3.up, transform.position);
         }
+    }
+
+    void ApplyScreenShake()
+    {
+        if (screenShakeStrength == 0) return;
+        float shakeAmp = 0.05f;
+        transform.localPosition = originalCameraPos + Random.insideUnitSphere * (shakeAmp * screenShakeStrength);
     }
 }
 

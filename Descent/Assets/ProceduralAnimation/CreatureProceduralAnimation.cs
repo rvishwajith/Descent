@@ -8,26 +8,41 @@ public class CreatureProceduralAnimation : MonoBehaviour
         originalVertices,
         vertices;
     private float maxZ, minZ;
+    private float length;
 
     void Start()
     {
         spline = new AnimationSpline(this.transform.Find("Spline"));
         mesh = this.GetComponent<MeshFilter>().mesh;
 
-        originalVertices = mesh.vertices;
-        vertices = new Vector3[mesh.vertices.Length];
         maxZ = mesh.bounds.max.z;
         minZ = mesh.bounds.min.z;
-        // Debug.Log("Max (Start): " + maxZ + ", Min (End): " + minZ);
+        length = Mathf.Abs(maxZ - minZ);
+        originalVertices = mesh.vertices;
+        vertices = new Vector3[mesh.vertices.Length];
+
+        Debug.Log("Length: " + length);
+        Debug.Log("Spline Length: " + spline.ApproximateLength());
+
+        var scaleRatio = length / spline.ApproximateLength();
+        spline.scaler.localScale = Vector3.one * scaleRatio;
+        Debug.Log("Scaled spline length: " + spline.ApproximateLength());
     }
 
     void OnDrawGizmos()
     {
-        if (spline != null) spline.DrawGizmo();
+        if (spline != null)
+        {
+            spline.DrawGizmo();
+        }
     }
 
     void FixedUpdate()
     {
+        // 1. Scale the spline down so that the curve length matches the length of the mesh.
+        // var scaleRatio = length / spline.ApproximateLength();
+        // spline.scaler.localScale = Vector3.one * scaleRatio;
+
         for (var i = 0; i < vertices.Length; i++)
         {
             float
@@ -44,29 +59,22 @@ public class CreatureProceduralAnimation : MonoBehaviour
             vertices[i] = pivot + pivotOffset;
         }
         mesh.vertices = vertices;
+        mesh.RecalculateNormals();
     }
 }
 
 public class AnimationSpline
 {
+    public Transform scaler;
     private Transform pointA, pointB, pointC, pointD;
 
     public AnimationSpline(Transform spline)
     {
+        scaler = spline;
         pointA = spline.Find("Start");
         pointB = spline.Find("1");
         pointC = spline.Find("2");
         pointD = spline.Find("End");
-    }
-
-    public static Vector3 TangentX(Vector3 forward)
-    {
-        return Vector3.Cross(Vector3.up, forward).normalized;
-    }
-
-    public static Vector3 TangentY(Vector3 forward)
-    {
-        return Vector3.Cross(forward, Vector3.right).normalized;
     }
 
     public Vector3 Forward(float t, Vector3 start)
@@ -80,25 +88,10 @@ public class AnimationSpline
     public Vector3 Position(float t)
     {
         Vector3
-            p0 = pointA.localPosition,
-            p1 = pointB.localPosition,
-            p2 = pointC.localPosition,
-            p3 = pointD.localPosition,
-            a = 2 * p1,
-            b = (-1 * p0 + p2) * t,
-            c = (2 * p0 - 5 * p1 + 4 * p2 - p3) * t * t,
-            d = (-1 * p0 + 3 * p1 - 3 * p2 + p3) * t * t * t,
-            point = 0.5f * (a + b + c + d);
-        return point;
-    }
-
-    public Vector3 PositionGlobal(float t)
-    {
-        Vector3
-            p0 = pointA.position,
-            p1 = pointB.position,
-            p2 = pointC.position,
-            p3 = pointD.position,
+            p0 = pointA.position - scaler.position,
+            p1 = pointB.position - scaler.position,
+            p2 = pointC.position - scaler.position,
+            p3 = pointD.position - scaler.position,
             a = 2 * p1,
             b = (-1 * p0 + p2) * t,
             c = (2 * p0 - 5 * p1 + 4 * p2 - p3) * t * t,
@@ -109,19 +102,44 @@ public class AnimationSpline
 
     public void DrawGizmo()
     {
-        float t = 0f, tInterval = 0.02f;
-        while (t < 1 - tInterval)
+        float t = 0f, tInterval = 0.04f;
+        while (t < 1)
         {
-            float startT = t, endT = startT + tInterval;
-            if (endT > 1) Debug.Log("AnimationSpline.DrawGizmos() ISSUE: EdgeEnd > 1 (value: " + endT + ")");
-            t += tInterval;
+            Vector3 start = Position(t) + scaler.position, end = Position(t + tInterval) + scaler.position;
 
-            Vector3 start = PositionGlobal(startT), end = PositionGlobal(endT);
-            Gizmos.color = Color.Lerp(Color.cyan, Color.red, t);
+            Gizmos.color = Color.Lerp(Color.yellow, Color.blue, t);
             Gizmos.DrawLine(start, end);
-            // Vector3 forward = start - end;
-            // Gizmos.DrawLine(start, TangentX(forward) + start);
-            // Gizmos.DrawLine(start, TangentY(forward) + start);
+
+            Vector3 forward = start - end;
+            Gizmos.DrawLine(start, TangentX(forward) + start);
+            Gizmos.DrawLine(start, TangentY(forward) + start);
+
+            t += tInterval;
         }
+    }
+
+    public float ApproximateLength()
+    {
+        float t = 0f, tInterval = 0.02f;
+        float length = 0;
+        while (t < 1)
+        {
+            Vector3 a = Position(t);
+            Vector3 b = Position(t + tInterval);
+            float segmentLength = (a - b).magnitude;
+            length += segmentLength;
+            t += tInterval;
+        }
+        return length;
+    }
+
+    public static Vector3 TangentX(Vector3 forward)
+    {
+        return Vector3.Cross(forward, Vector3.up).normalized;
+    }
+
+    public static Vector3 TangentY(Vector3 forward)
+    {
+        return Vector3.Cross(Vector3.right, forward).normalized;
     }
 }

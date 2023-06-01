@@ -1,6 +1,17 @@
 # Update Notes
 A complete version history is listed from newest-to-oldest.
 
+## Version 0.2.4 | Published May 31, 2023
+- Panels and buttons can now be added to the UI manager and can be toggled as well.
+- Added rideable creature tag:
+  - For creatures within the viewport and sufficiently close to the player, the nearest rideable creature can be interacted with using a button.
+- Added snake path follower script (nodes follow the general position history of the initial node).
+- Added the ability to switch camera targets to/from the player (distance based currently).
+- Added a whale shark mesh for procedural animation testing.
+- Began completion of the spline-curve based procedural animation system.
+- Removed old manta ray prototyping.
+- Added a screenshake function to the camera (called when gates are opening).
+
 ## Version 0.2.3 | Published May 30, 2023
 - Made UI manager on Camera globally accesible and initialized at start.
 - Added the ability to hide/show labels.

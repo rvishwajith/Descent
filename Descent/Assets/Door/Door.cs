@@ -34,6 +34,7 @@ public class Door : MonoBehaviour
 
     void PlayOpeningSound()
     {
+        Camera.main.GetComponent<CameraController>().screenShakeStrength = 0.3f;
         var audioSource = transform.GetComponent<AudioSource>();
         audioSource.loop = false;
         audioSource.Play();
@@ -44,6 +45,7 @@ public class Door : MonoBehaviour
         Debug.Log("Door.DidOpen() - Finished opening.");
         didOpen = true;
         opening = false;
+        Camera.main.GetComponent<CameraController>().screenShakeStrength = 0f;
     }
 
     public void Update()

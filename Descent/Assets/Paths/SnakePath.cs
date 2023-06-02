@@ -34,6 +34,7 @@ public class SnakePath : MonoBehaviour
         {
             nodes[i] = transform.GetChild(i);
         }
+        head = nodes[0];
     }
 
     void Update()
@@ -45,6 +46,10 @@ public class SnakePath : MonoBehaviour
             MoveHead();
             MoveFollowers();
             ConstrainFollowers();
+        }
+        foreach (var node in nodes)
+        {
+            // node.position += node.forward * Time.deltaTime * moveSpeed;
         }
     }
 

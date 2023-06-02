@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
         foreach (var creature in allRideableCreatures)
         {
             var distance = (transform.position - creature.transform.position).magnitude;
-            if (distance < 5)
+            if (distance < 7)
             {
                 Camera.main.GetComponent<CameraController>().SetTarget(creature.transform);
             }

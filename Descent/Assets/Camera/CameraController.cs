@@ -12,8 +12,9 @@ public class CameraController : MonoBehaviour
 
     private UIInfoManager uiManager;
 
-    public int mode;
-    public float screenShakeStrength = 0f;
+    [HideInInspector] public int mode;
+    [HideInInspector] public float screenShakeStrength = 0f;
+    [HideInInspector] public float lensForwardScale = 1.5f;
 
     void Start()
     {
@@ -30,56 +31,89 @@ public class CameraController : MonoBehaviour
 
     public void SetTarget(Transform target)
     {
-        if (target.TryGetComponent<CreaturePathHistory>(out pathHistory))
-        {
-            hasPathHistory = true;
-            // Debug.Log("CameraController.SetTarget() - Target has a path history.");
-            this.target = target;
-        }
-        else
-        {
-            hasPathHistory = false;
-            pathHistory = null;
-        }
-        ShowTargetInfo();
-    }
+        if (target.name.ToLower() == "player")
+            target.GetComponent<PlayerController2>().mode = 0;
+        else if (TargetName() == "player")
+            this.target.GetComponent<PlayerController2>().mode = 9;
 
-    void ShowTargetInfo()
-    {
-        var targetName = target.name.Replace(" ", "").ToLower();
-        if (targetName == "player")
-        {
-            uiManager.SetPanelVisible("SpeciesNamePanel", false);
-        }
-        else if (targetName == "mantaray") // is creature
-        {
-            uiManager.SetPanelVisible("SpeciesNamePanel", true);
-            uiManager.SetLabelText("SpeciesEnglish", "Giant Oceanic Manta Ray");
-            uiManager.SetLabelText("SpeciesLatin", "Mobula Birostris");
-        }
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.B) && target.name != "Player")
-        {
-            SetTarget(GameObject.Find("Player").transform);
-        }
+        hasPathHistory = target.TryGetComponent<CreaturePathHistory>(out pathHistory);
         if (hasPathHistory)
         {
-            FollowPathHistory();
+            this.target = target;
+            UpdateUI();
         }
-        ApplyScreenShake();
+        else Debug.Log("CameraController.SetTarget() - Error: Target has no path history!");
+    }
+
+    void UpdateUI()
+    {
+        var name = TargetName();
+        if (name == "player")
+        {
+            uiManager.SetPanel("SpeciesName", false);
+            uiManager.SetPanel("ExitFollow", false);
+            uiManager.SetPanel("FollowCreature", true);
+            uiManager.SetPanel("DoorInteraction", false);
+        }
+        else if (name == "mantaray") // is creature
+        {
+            uiManager.SetPanel("ExitFollow", true);
+            uiManager.SetPanel("SpeciesName", true);
+            uiManager.SetPanel("FollowCreature", false);
+            uiManager.SetPanel("DoorInteraction", false);
+
+            uiManager.SetText("SpeciesEnglish", "Giant Oceanic Manta Ray");
+            uiManager.SetText("SpeciesLatin", "Mobula Birostris");
+        }
+    }
+
+    private string TargetName()
+    {
+        return target.name.Replace(" ", "").ToLower();
+    }
+
+    private void Update()
+    {
+        if (TargetName() == "player")
+            CheckForNearbyCreatures();
+        else if (Input.GetKeyDown(KeyCode.B))
+            SetTarget(GameObject.Find("Player").transform);
+        if (hasPathHistory)
+            FollowPathHistory();
+    }
+
+    void CheckForNearbyCreatures()
+    {
+        bool creaturesInView = false;
+        Transform nearestCreature = null;
+        float nearestCreatureDist = float.MaxValue;
+
+        foreach (var creature in GameObject.FindGameObjectsWithTag("RideableCreature"))
+        {
+            var dist = (target.position - creature.transform.position).magnitude;
+            if (dist < 6)
+            {
+                creaturesInView = true;
+                if (dist < nearestCreatureDist)
+                {
+                    nearestCreature = creature.transform;
+                    nearestCreatureDist = dist;
+                }
+            }
+        }
+        uiManager.SetPanel("FollowCreature", creaturesInView);
+        if (creaturesInView && Input.GetKeyDown(KeyCode.F))
+            SetTarget(nearestCreature.transform);
     }
 
     void FollowPathHistory()
     {
         var currentCameraPos = transform.position;
-        var pos = Vector3.Lerp(currentCameraPos, cameraPosTarget, Time.deltaTime * 2);
+        var pos = Vector3.Lerp(currentCameraPos, cameraPosTarget, Time.deltaTime * 3);
         transform.position = pos;
 
-        var currentLensPos = transform.position + transform.forward;
-        var lensPos = Vector3.Lerp(currentLensPos, lensPosTarget, Time.deltaTime * 2);
+        var currentLensPos = transform.position + transform.forward * lensForwardScale;
+        var lensPos = Vector3.Lerp(currentLensPos, lensPosTarget, Time.deltaTime * 3);
         transform.LookAt(lensPos);
 
         originalCameraPos = transform.position;

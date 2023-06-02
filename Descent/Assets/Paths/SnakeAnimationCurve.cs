@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class SnakeAnimationCurve : MonoBehaviour
@@ -17,6 +18,11 @@ public class SnakeAnimationCurve : MonoBehaviour
         CreateSplines();
         UpdateCaches();
         // StartCoroutine(LogApproximateLengths());
+    }
+
+    private void FixedUpdate()
+    {
+        MoveNodesSinusoid();
     }
 
     public void GetNodes()
@@ -103,16 +109,6 @@ public class SnakeAnimationCurve : MonoBehaviour
         {
             var a = GetPoint(t);
             var b = GetPoint(t + 0.025f);
-            /*
-            if ((a - b).magnitude > 0.75f)
-            {
-                Gizmos.color = Color.yellow;
-                Gizmos.DrawLine(a, b);
-                Gizmos.color = Color.cyan;
-                Debug.Log("Error at t: " + t);
-                continue;
-            }
-            */
             Gizmos.DrawLine(a, b);
         }
 
@@ -191,6 +187,15 @@ public class SnakeAnimationCurve : MonoBehaviour
         var point = GetPoint(t);
         var ratio = expectedCurveLength / cachedLength;
         return point * ratio;
+    }
+
+    void MoveNodesSinusoid()
+    {
+        foreach (var node in nodes)
+        {
+            var angle = 0.9f * Mathf.Sin(Time.time * 1.4f + node.position.z) * Mathf.Pow(node.position.z / 11, 2);
+            node.position = new(angle, node.position.y, node.position.z);
+        }
     }
 }
 

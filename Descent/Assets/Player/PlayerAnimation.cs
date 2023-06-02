@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    PlayerController controller;
+    PlayerController2 controller;
     Transform legLeft, legRight;
 
     float tLeg = 0;
@@ -13,7 +13,7 @@ public class PlayerAnimation : MonoBehaviour
     void Start()
     {
         FindChildren();
-        controller = transform.GetComponent<PlayerController>();
+        controller = transform.GetComponent<PlayerController2>();
     }
 
     void FindChildren()
@@ -24,7 +24,7 @@ public class PlayerAnimation : MonoBehaviour
 
     void Update()
     {
-        if (controller.GetMode() == MovementModes.MOVE_NORMAL || controller.GetMode() == MovementModes.IDLE)
+        if (controller.mode > -1)
         {
             AnimateLegs();
         }
@@ -32,8 +32,8 @@ public class PlayerAnimation : MonoBehaviour
 
     void AnimateLegs()
     {
-        var speed = 0.65f * controller.GetSpeed() + 0.35f;
-        tLeg += speed * Time.deltaTime;
+        var speed = Mathf.Clamp(Mathf.InverseLerp(0, controller.speedMax, controller.speed + 0.5f), 0, 1) + 0.5f;
+        tLeg += 3.5f * speed * Time.deltaTime;
 
         var amp = 1.5f * speed + 0.5f;
 

@@ -1,5 +1,51 @@
 # Update Notes
-A complete version history is listed from newest-to-oldest.
+A complete version history for the master branch is listed below, from newest-to-oldest.
+
+## Version 0.3.1 | In-progress
+- Improvements to water post processing system:
+  - Fog distance calculation adjusted so max percieved distance from camera is limited to visibility distance.
+- Started working on surface wave system:
+  - Gerstner wave deformation with adjustable iterations.
+  - Seperate underside and surface planes with individual shaders.
+
+# Milestone Version 0.3.0 | Published June 1, 2023
+- Changed Unity version from 2022.2.9 to 2022.3.0 and rebuilt library folder + removed packages.
+- Nearly completed spline-based deformation system (in C# form):
+  - Works with a target following deformation spine.
+  - Works with any mesh length (tested with 2 shark meshes).
+  - Independent of mesh/spine positions.
+  - Glitch: When orientation of the spline changes the deformation is improper (normals get inverted)
+  - Possible change: instead of using the position, use the tangent based on the relative rotation of the given point's forward vector on the spline compared to the pivot point's forward vector to fix the rotation issues.
+- Started working on vertex deformation (using both C# and shader graph) for small fish:
+  - Components: pivot on y, pivot on z, global side-to-side on x, sinusoid shift on x (based on z).
+  - Speed/offset is controllable.
+  - Strength can be masked for all components using gradients.
+- Added the following creatures for procedural animation testing:
+  - Giant trevally (uses instanced animation)
+  - Great hammerhead shark (works with spline)
+  - Whale shark (works with spline)
+  - Atlantic mackerel
+- Started converting spline movement system to "snake-like" movement:
+  - Updates relative to the pathed movement of the head node.
+  - Will be used for the deformation spline of sharks, dolphins, whales, and other large and long meshes.
+- Some reorganization/removal of junk files (removed "Rendering" and "SceneFX" folders to merge into PostFX, etc.)
+- Updated README/Thumbnails.
+- Adjusted particles materials for transparency culling.
+- FPS metrics now uses coroutines to update instead of every frame.
+- Added post processing FX for underwater environment:
+  - Fog color now changes based on the y position of the pixel using a gradient.
+  - Visibility now changes based on the distance from the camera (fixed falloff distance)
+- Started working on a new version of the boids simulation for small groups of fish.
+- Started adding simulation code for jumping/diving animals (dolphins/birds):
+  - No flocking behaviour yet.
+- Started overhauling the player controller (PlayerController2 class): 
+  - Rotation glitches are now fixed.
+  - Speed is now based on acceleration with proper state-logging.
+  - Boosting now works.
+  - Idle state rotation is in-progress.
+  - Animation controller works with new player controller.
+- Started overhauling the camera/UI controls.
+  - Now panels will only show up in the proper context (ex. only observe if an observable creature is on the screen and nearby).
 
 ## Version 0.2.4 | Published May 31, 2023
 - Panels and buttons can now be added to the UI manager and can be toggled as well.
@@ -40,7 +86,7 @@ A complete version history is listed from newest-to-oldest.
 - Updated manta ray procedural animation:
   - Vertices now pivot around the center point based on a gradient and an angle.
 
-## Version 0.2.0 | Published May 30, 2023
+# Milestone Version 0.2.0 | Published May 30, 2023
 - Added (N^2) boids behaviour:
   - Center of mass
   - Match velocity
@@ -73,8 +119,6 @@ A complete version history is listed from newest-to-oldest.
   - Head copies creature position (with some offset).
 - Added y-depth based fog color changing to global fullscreen shader.
 - Added ambient particle VFX.
-
-# Major Update - Version 0.2 Release
 
 ## Version 0.1.6 | Published May 23, 2023
 - Spline interpolation for procedural mesh animation now works properly (using 1 catmull rom spline)
@@ -127,6 +171,5 @@ A complete version history is listed from newest-to-oldest.
   - Will be used for a future water line at the water surface.
 
 # Project Creation | May 18, 2023.
-Repository, Unity/VS projects, etc. created.
 
 

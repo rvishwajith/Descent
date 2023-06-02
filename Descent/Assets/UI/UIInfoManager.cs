@@ -31,10 +31,14 @@ public class UIInfoManager : MonoBehaviour
     {
         labels.Add("SpeciesEnglish", GetLabel("EnglishNameLabel"));
         labels.Add("SpeciesLatin", GetLabel("ScientificNameLabel"));
-        panels.Add("SpeciesNamePanel", GetPanel("SpeciesName"));
+
+        panels.Add("SpeciesName", GetPanel("SpeciesNamePanel"));
+        panels.Add("FollowCreature", GetPanel("FollowCreaturePanel"));
+        panels.Add("ExitFollow", GetPanel("ExitFollowPanel"));
+        panels.Add("DoorInteraction", GetPanel("DoorInteractionPanel"));
     }
 
-    public void SetLabelText(string labelName, string value)
+    public void SetText(string labelName, string value)
     {
         TextMeshProUGUI label;
         if (labels.TryGetValue(labelName, out label))
@@ -45,7 +49,7 @@ public class UIInfoManager : MonoBehaviour
         Debug.Log("Set() - Couldn't find a label with key: " + labelName);
     }
 
-    public void SetPanelVisible(string panelName, bool visible)
+    public void SetPanel(string panelName, bool visible)
     {
         Transform panel;
         if (panels.TryGetValue(panelName, out panel))
@@ -56,7 +60,7 @@ public class UIInfoManager : MonoBehaviour
         Debug.Log("Set() - Couldn't find a label with key: " + panelName);
     }
 
-    public void SetLabelVisible(string labelName, bool visible)
+    public void SetLabel(string labelName, bool visible)
     {
         TextMeshProUGUI label;
         if (labels.TryGetValue(labelName, out label))

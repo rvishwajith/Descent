@@ -9,7 +9,7 @@ public class CreaturePathHistory : MonoBehaviour
     private float
         minSampleInterval = 0.05f, // In meters/second.
         length; // In meters, gets set in Start().
-    private int maxSamples = 1000;
+    private int maxSamples = 2000;
 
     private void Start()
     {

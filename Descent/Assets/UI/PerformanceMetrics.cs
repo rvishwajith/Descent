@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 
@@ -11,8 +12,8 @@ public class PerformanceMetrics : MonoBehaviour
 
     void Start()
     {
-        // Application.targetFrameRate = 120;
         calculator = new();
+        StartCoroutine(UpdateLevel());
     }
 
     void Update()
@@ -20,16 +21,21 @@ public class PerformanceMetrics : MonoBehaviour
         calculator.Update(Time.deltaTime);
     }
 
-    void OnGUI()
+    private IEnumerator UpdateLevel()
     {
-        label.text = calculator.ContextualFPS();
+        while (true)
+        {
+            label.text = calculator.ContextualFPS();
+            yield return new WaitForSeconds(0.25f);
+        }
+        // yield return null;
     }
 }
 
 class FrameRateCalculator
 {
     private Queue<float> times;
-    private int maxSamples = 400, minSamples = 60;
+    private int maxSamples = 200, minSamples = 10;
 
     public FrameRateCalculator()
     {

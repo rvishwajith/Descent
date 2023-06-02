@@ -1,180 +1,162 @@
-﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Transform cursorDebug;
-    private int mode = MovementModes.IDLE;
+    // MODES:
+    // 9 - Disabled, 0 - Idle, 1 - Swimming, 2 - Boosting
+    [HideInInspector] public int mode = 0;
+    [HideInInspector] public float speed = 0, speedMax = 0;
 
-    private Vector3
-        rotationDir = new(0, 0, 0),
-        deadZone = new(0f, 0f, 0),
-        rotationSpeed = new(40, 70, 0);
+    // SWIMMING (Regular Mode)
+    [Header("Regular Movement")]
+    public float swimSpeedMax;
+    public float swimAcceleration;
 
-    private float // 1 m/s = 2.24 mph
-        speed = 0,
-        speedMax = 6f, // 17 mph
-        acceleration = 2f; // m/s^2
-    private float // Boosting
-        boostSpeedMax = 13f,
-        boostDuration = 2f,
-        boostAcceleration = 10f,
-        boolEndTime = 0;
-    private bool boosting = false;
-    public LayerMask mask;
+    // SWIMMING (Boost Mode)
+    [Header("Boosted Movement")]
+    public float boostSpeedMax;
+    public float boostAcceleration;
+
+    // ROTATION
+    // Note: Diving is on the y axis and turning is on the x axis.
+    private float turnAngle = 0,
+        diveAngle = 0, diveAngleMin = -70, diveAngleMax = 88;
+    [Header("Rotation")]
+    public float turnSensitivity = 1;
+    public float diveSensitivity = 1;
 
     private void Update()
     {
-        SelectMovementMode();
-        HandleMovementMode();
+        if (mode == 9) return; // Disabled.
+        SetMode();
+        if (mode == 0)
+        {
+            Idle();
+        }
+        else if (mode == 1)
+        {
+            SwimmingSpeed();
+            SwimmingRotation();
+            SwimmingTryBoost();
+        }
+        else if (mode == 2)
+        {
+            BoostingSpeed();
+            SwimmingRotation();
+        }
+        Move();
     }
 
-    private void FixedUpdate()
+    public void SetMode()
     {
-        // Debug.Log(Time.fixedDeltaTime);
+        if (mode != 2 && ShouldMove())
+            mode = 1;
+        else if ((mode != 0) && !ShouldMove())
+            mode = 0;
     }
 
-    public float GetSpeed() { return speed; }
-
-    public int GetMode() { return mode; }
-
-    void SelectMovementMode()
+    public void Idle()
     {
-        if (Input.GetKey(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.LeftShift))
-        {
-            mode = MovementModes.MOVE_NORMAL;
-            rotationDir = GetMouseDirection();
-        }
-        else if (Input.touchCount > 0)
-        {
-            mode = MovementModes.MOVE_NORMAL;
-        }
-        else
-        {
-            mode = MovementModes.IDLE;
-        }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            SwitchTargets();
-        }
+        speed -= 2 * swimAcceleration * Time.deltaTime;
+        speed = Mathf.Clamp(speed, 0, speedMax);
     }
 
-    void SwitchTargets()
+    public void Move()
     {
-        var allRideableCreatures = GameObject.FindGameObjectsWithTag("RideableCreature");
-        foreach (var creature in allRideableCreatures)
-        {
-            var distance = (transform.position - creature.transform.position).magnitude;
-            if (distance < 7)
-            {
-                Camera.main.GetComponent<CameraController>().SetTarget(creature.transform);
-            }
-        }
-    }
-
-    void HandleMovementMode()
-    {
-        if (mode == MovementModes.MOVE_NORMAL)
-        {
-            speed += acceleration * Time.deltaTime;
-            speed = Mathf.Clamp(speed, 0, speedMax);
-            // Debug.Log(speed);
-            Turn();
-            Move();
-        }
-        else if (mode == MovementModes.MOVE_BOOST)
-        {
-            speed += boostAcceleration * Time.deltaTime;
-            speed = Mathf.Clamp(speed, 0, boostSpeedMax);
-            Turn();
-            Move();
-        }
-        else if (mode == MovementModes.IDLE)
-        {
-            rotationDir = Vector3.zero;
-            speed -= 3 * acceleration * Time.deltaTime;
-            speed = Mathf.Clamp(speed, 0, speedMax);
-            Move();
-        }
-    }
-
-    private Vector3 GetMouseDirection()
-    {
-        var mouseDirection = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-        mouseDirection -= new Vector3(0.5f, 0.5f, 0);
-        mouseDirection *= 2; // Now from [-1, 1] for x and y (relative to viewport).
-
-        cursorDebug.localPosition = new Vector3(
-            mouseDirection.x,
-            mouseDirection.y * (1 / Camera.main.aspect),
-            cursorDebug.localPosition.z);
-
-        if (Mathf.Abs(mouseDirection.x) < deadZone.x)
-        {
-            mouseDirection.x = 0;
-        }
-        if (Mathf.Abs(mouseDirection.y) < deadZone.y)
-        {
-            mouseDirection.y = 0;
-        }
-        return mouseDirection;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawRay(transform.position, transform.forward * speed);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawRay(transform.position, transform.up * speed);
-    }
-
-    void Turn()
-    {
-        Vector3 rotationScale = rotationSpeed * Time.deltaTime;
-
-        var rotation = new Vector3(-rotationDir.y, rotationDir.x, 0);
-        if (rotation.magnitude > 1)
-        {
-            rotation = rotation.normalized;
-        }
-        // Debug.Log(Vector3.Dot(transform.up, Vector3.up));
-
-        transform.Rotate(Vector3.Scale(rotation, rotationScale));
-        if (Mathf.Abs(Vector3.Dot(transform.forward, Vector3.up)) > 0.7f)
-        {
-            transform.forward = Vector3.Slerp(transform.forward,
-                Vector3.Scale(transform.forward, new Vector3(1, 0.7f, 1)), Time.deltaTime);
-
-            // rotation.y *= -1;
-            // Debug.Log(Vector3.Dot(transform.up, Vector3.up));
-        }
-    }
-
-    void Move()
-    {
-        RaycastHit hit;
-        Ray ray = new Ray(transform.position, transform.forward);
-        float rayDist = (speed / 2) + 1.5f;
-        if (Physics.Raycast(ray, out hit, rayDist, mask))
-        {
-            speed /= (1 + Time.deltaTime);
-            return;
-        }
+        speed = Mathf.Clamp(speed, 0, speedMax);
         transform.position += transform.forward * Time.deltaTime * speed;
     }
 
-    void AnimateFlippers()
+    public void SwimmingSpeed()
     {
-
+        speedMax = swimSpeedMax;
+        speed += swimAcceleration * Time.deltaTime;
+        speed = Mathf.Clamp(speed, 0, speedMax);
     }
-}
 
-public static class MovementModes
-{
-    public static int IDLE = 0;
-    public static int MOVE_NORMAL = 1;
-    public static int MOVE_BOOST = 2;
-    public static int REDIRECT = 3;
-    public static int CUTSCENE = 4;
+    public void SwimmingRotation()
+    {
+        var speedMultiplier = Mathf.Clamp(Mathf.InverseLerp(0, speedMax, speed * 1.5f), 0, 1);
+        var input = RotationInput() * speedMultiplier;
+
+        turnAngle += input.x * (Time.deltaTime * 90);
+        // Debug.Log(turnAngle);
+        diveAngle += input.y * (Time.deltaTime * 90);
+        diveAngle = Mathf.Clamp(diveAngle, diveAngleMin, diveAngleMax);
+        transform.rotation = Quaternion.Euler(diveAngle, turnAngle, 0);
+    }
+
+    public void SwimmingTryBoost()
+    {
+        bool canBoost = speed == swimSpeedMax && Input.GetKeyDown(KeyCode.Space);
+        if (canBoost)
+        {
+            mode = 2;
+            StartCoroutine(BoostDeceleration());
+        }
+    }
+
+    private IEnumerator BoostDeceleration()
+    {
+        yield return new WaitForSeconds(1.5f);
+        while (speedMax > swimSpeedMax)
+        {
+            speedMax -= 0.2f;
+            yield return new WaitForSeconds(0.1f);
+        }
+        mode = 1;
+        speedMax = swimSpeedMax;
+        yield return null;
+    }
+
+    public void BoostingSpeed()
+    {
+        speedMax = boostSpeedMax;
+        speed += boostAcceleration * Time.deltaTime;
+    }
+
+    private bool ShouldMove()
+    {
+        return ShouldMoveMouse() || ShouldMoveKeyboard();
+    }
+
+    private bool ShouldMoveMouse()
+    {
+        return Input.GetKey(KeyCode.Mouse0);
+    }
+
+    private bool ShouldMoveKeyboard()
+    {
+        return Input.GetKey(KeyCode.LeftShift);
+    }
+
+    private Vector2 RotationInput()
+    {
+        return Vector2.Scale(RotationInputMouse(), new(turnSensitivity, diveSensitivity));
+    }
+
+    private Vector2 RotationInputMouse()
+    {
+        Vector2 viewportPos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        // Convert from viewport position (0 to 1) to quadrant position (-1 to 1)
+        Vector2 screenSpacePos = viewportPos * 2 - Vector2.one;
+        screenSpacePos.y *= -1;
+        return screenSpacePos;
+    }
+
+    private Vector2 RotationInputKeyboard()
+    {
+        Vector2 input = Vector2.zero;
+        if (Input.GetKey(KeyCode.A))
+            input.x = -1;
+        else if (Input.GetKey(KeyCode.D))
+            input.x = 1;
+        if (Input.GetKey(KeyCode.W))
+            input.y = -1;
+        else if (Input.GetKey(KeyCode.S))
+            input.y = 1;
+        return input.normalized;
+    }
 }

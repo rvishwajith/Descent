@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3083832701020944030}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.9}
+  m_LocalPosition: {x: -1, y: 0, z: 1.5}
   m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 3049920574679438353}
   - component: {fileID: 6625939048947387996}
   - component: {fileID: 6004027101937148776}
+  - component: {fileID: 814630959271003200}
   m_Layer: 0
   m_Name: AdaptiveCamera
   m_TagString: MainCamera
@@ -120,7 +121,7 @@ Transform:
   - {fileID: 3125651585656277641}
   - {fileID: 2272241797073321677}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 30, z: 0}
 --- !u!20 &8092908396169930389
 Camera:
@@ -132,7 +133,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.09825561, g: 0.1774455, b: 0.3018868, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -154,8 +155,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 100
-  field of view: 60
+  far clip plane: 1000
+  field of view: 40
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -240,6 +241,7 @@ MonoBehaviour:
   target: {fileID: 0}
   mode: 0
   screenShakeStrength: 0
+  lensForwardScale: 1.5
 --- !u!114 &6004027101937148776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,6 +252,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b86539e5f814c49808a68ec7cfd6ad1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &814630959271003200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4408577163263819342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3e3af7835ec24128b5d6dc88b37afa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &3257735858848508892
@@ -398,6 +412,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AmbientDebris
+      objectReference: {fileID: 0}
+    - target: {fileID: 8388178109239119920, guid: 26c9f67a731854e649b2fee88f912504,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8388178109239119920, guid: 26c9f67a731854e649b2fee88f912504,
+        type: 3}
+      propertyPath: EmissionModule.rateOverDistance.scalar
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

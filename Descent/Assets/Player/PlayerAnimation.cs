@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    PlayerController2 controller;
+    PlayerController controller;
+    Transform body;
     Transform legLeft, legRight;
 
     float tLeg = 0;
@@ -13,13 +14,15 @@ public class PlayerAnimation : MonoBehaviour
     void Start()
     {
         FindChildren();
-        controller = transform.GetComponent<PlayerController2>();
+        controller = transform.GetComponent<PlayerController>();
+        // AnimateBodyUpright();
     }
 
     void FindChildren()
     {
-        legLeft = transform.Find("Mesh/ThighL");
-        legRight = transform.Find("Mesh/ThighR");
+        body = transform.Find("Body");
+        legLeft = body.Find("ThighL");
+        legRight = body.Find("ThighR");
     }
 
     void Update()
@@ -30,12 +33,24 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
+    void AnimateBodyUpright()
+    {
+        Delegates.Animation.Animate(
+            body,
+            property: "LocalEulerAngles",
+            start: body.localEulerAngles,
+            end: Vector3.down * 90,
+            duration: 1.5f,
+            delay: 0.25f,
+            easing: 0);
+    }
+
     void AnimateLegs()
     {
         var speed = Mathf.Clamp(Mathf.InverseLerp(0, controller.speedMax, controller.speed + 0.5f), 0, 1) + 0.5f;
         tLeg += 3.5f * speed * Time.deltaTime;
 
-        var amp = 1.5f * speed + 0.5f;
+        var amp = 2.5f * speed + 0.5f;
 
         var tL = tLeg;
         var tR = tLeg + Mathf.PI;

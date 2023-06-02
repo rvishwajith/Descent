@@ -2,11 +2,18 @@
 A complete version history for the master branch is listed below, from newest-to-oldest.
 
 ## Version 0.3.1 | In-progress
-- Improvements to water post processing system:
-  - Fog distance calculation adjusted so max percieved distance from camera is limited to visibility distance.
-- Started working on surface wave system:
-  - Gerstner wave deformation with adjustable iterations.
-  - Seperate underside and surface planes with individual shaders.
+- Built an animation/tweening system:
+  - Has property, delay, duration, interpolation type (incomplete)
+  - Can animate position, local position, euler angles, local euler angles.
+  - Works on any transform
+  - Door script now uses the new animation system.
+- Changes to ocean surface shading:
+  - Built a working standalone refraction shader using shader graph.
+  - Added wafe surface and underside planes with seperate materials.
+  - Added gerstner wave deformation with adjustable properties + noise + wave count (C# script).
+- Updated Mac test build to 0.3.
+- Added a basic starting menu scene.
+- General cleanup/renaming + removed old player controller class (PlayerController2 -> PlayerController).
 
 # Milestone Version 0.3.0 | Published June 1, 2023
 - Changed Unity version from 2022.2.9 to 2022.3.0 and rebuilt library folder + removed packages.
@@ -44,6 +51,7 @@ A complete version history for the master branch is listed below, from newest-to
   - Boosting now works.
   - Idle state rotation is in-progress.
   - Animation controller works with new player controller.
+  - Supports both keyboard and mouse (bo touch yet).
 - Started overhauling the camera/UI controls.
   - Now panels will only show up in the proper context (ex. only observe if an observable creature is on the screen and nearby).
 

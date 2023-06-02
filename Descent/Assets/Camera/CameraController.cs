@@ -32,10 +32,9 @@ public class CameraController : MonoBehaviour
     public void SetTarget(Transform target)
     {
         if (target.name.ToLower() == "player")
-            target.GetComponent<PlayerController2>().mode = 0;
+            target.GetComponent<PlayerController>().mode = 0;
         else if (TargetName() == "player")
-            this.target.GetComponent<PlayerController2>().mode = 9;
-
+            this.target.GetComponent<PlayerController>().mode = 9;
         hasPathHistory = target.TryGetComponent<CreaturePathHistory>(out pathHistory);
         if (hasPathHistory)
         {
@@ -80,6 +79,7 @@ public class CameraController : MonoBehaviour
             SetTarget(GameObject.Find("Player").transform);
         if (hasPathHistory)
             FollowPathHistory();
+        ApplyScreenShake();
     }
 
     void CheckForNearbyCreatures()

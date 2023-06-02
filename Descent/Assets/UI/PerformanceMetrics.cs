@@ -13,22 +13,18 @@ public class PerformanceMetrics : MonoBehaviour
     void Start()
     {
         calculator = new();
-        StartCoroutine(UpdateLevel());
+        StartCoroutine(UpdateLabel());
     }
 
-    void Update()
-    {
-        calculator.Update(Time.deltaTime);
-    }
+    void Update() { calculator.Update(Time.deltaTime); }
 
-    private IEnumerator UpdateLevel()
+    private IEnumerator UpdateLabel()
     {
         while (true)
         {
-            label.text = calculator.ContextualFPS();
             yield return new WaitForSeconds(0.25f);
+            label.text = calculator.ContextualFPS();
         }
-        // yield return null;
     }
 }
 
@@ -39,7 +35,6 @@ class FrameRateCalculator
 
     public FrameRateCalculator()
     {
-        Debug.Log("Performance Metrics: Calculating FPS.");
         times = new();
     }
 

@@ -1,14 +1,14 @@
 # Update Notes
 A complete version history for the master branch is listed below, from newest-to-oldest.
 
-## Version 0.3.1 | In-progress
+## Version 0.3.1 | Published June 2, 2023
 - Built an animation/tweening system:
   - Has property, delay, duration, interpolation type (incomplete)
   - Can animate position, local position, euler angles, local euler angles.
   - Works on any transform
   - Door script now uses the new animation system.
 - Changes to ocean surface shading:
-  - Built a working standalone refraction shader using shader graph.
+  - Partially working standalone refraction shader using shader graph (works with normal map, but not facing world up).
   - Added wafe surface and underside planes with seperate materials.
   - Added gerstner wave deformation with adjustable properties + noise + wave count (C# script).
 - Updated Mac test build to 0.3.

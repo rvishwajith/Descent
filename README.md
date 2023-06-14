@@ -1,12 +1,22 @@
-![A screenshot of Descent's development (v0.2.4).](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/latest.png)
-**Above:** Play testing "observation mode" of a Manta Ray in Unity (v0.2.4).
-![A screenshot of the custom procedural animation system using splines.](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/spline-animation-demo.png)
-**Above:** Testing the custom procedural animation system using splines (v0.3.0).
+# Gallery
+![The new fog system with height-based color and an adjustable falloff curve.](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-4-0-fog2.png)
+**Above:** The new fog system with height-based color and an adjustable falloff curve (v0.4.0).
+
+![A prototype of the animation system for large creatures using a manta ray.](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-2-4.png)
+**Above:** A prototype of the animation system for large creatures using a manta ray (v0.2.4).
+
+![The custom procedural deformation system using a set of catmull-rom splines.](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/spline-animation-demo.png)
+**Above:** The custom procedural deformation system using a set of catmull-rom splines (v0.3.0).
+
+![Procedural kelp being pushed around by some manta rays using verlet integration.](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-4-0-verlet-kelp2.png)
+**Above:** Procedural kelp being pushed around by some manta rays using verlet integration (v0.4.0).
 
 # About
-Descent is an underwater exploration and puzzle game which I am solo-developing.
+Descent is an underwater exploration and puzzle game which I am solo-developing. The most recent major release is Version 0.4.
 
-My goal is to amplify people's interests with one of my personal passions, marine biology through games. Instead of designing a horror or survival game as underwater games tend to be, Descent is designed to be peaceful, simple, and beautiful. Players can learn about and interact with dozens of underwater species and ocean biomes through an entertaining and relazing medium.
+The goal of this project is to amplify people's interests with one of my personal passions, marine biology through games. Instead of designing a horror or survival game as underwater games tend to be, Descent is designed to be peaceful, simple, and beautiful.
+
+Players can learn about and interact with dozens of underwater species and ocean biomes through an entertaining and relazing medium.
 
 ## Development
 Descent is being developed using Unity 2022.2.9 (Universal Render Pipeline) on macOS.

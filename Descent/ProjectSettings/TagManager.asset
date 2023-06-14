@@ -6,6 +6,7 @@ TagManager:
   tags:
   - LargeCreature
   - RideableCreature
+  - Terrain
   layers:
   - Default
   - TransparentFX
@@ -13,11 +14,11 @@ TagManager:
   - Player
   - Water
   - UI
-  - BoidCollisions
-  - LargeCreatures
-  - WaterSurface
-  - 
-  - 
+  - Boids
+  - LargeAnimals
+  - Surface
+  - Terrain
+  - Bounds
   - 
   - 
   - 

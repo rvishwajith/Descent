@@ -1,6 +1,68 @@
 # Update Notes
 A complete version history for the master branch is listed below, from newest-to-oldest.
 
+## Version 0.4.1 | In-progress
+- Started switching to the DOTS job system for kelp verlet integration.
+
+## Milestone Version 0.4.0 | Published June 13, 2023
+- Major project reorganization:
+  - All life is now in subfolders under "Life".
+  - Utilities folder added.
+  - Camera/player controllers now under "Controller".
+- Dynamic kelp is now implemented:
+  - Works with both creatures and the player (layer-based)
+  - Note: currently works individually for kelp deformation and leaf deformation, but not both together.
+  - Kelp stalks deform based on verlet point positions.
+  - Leaves deform based on point positions but mesh normals are flipped.
+  - Number of integrations is reduced by setting a high deceleration value.
+  - Generated height and number of points are dynamic.
+- Manta ray now uses shader graph for animation.
+  - Incoming change: the "time" value will be set programatically for movement-based up/down wing acceleration.
+- Started working on a new version of the Boids algorithm:
+  - Uses octree-based culling and a cell allication map.
+  - Glitch where boids are not allocated to the proper cell when rounding their value (possible fix: use truncation instead).
+- UI updates:
+  - Created a system for auto-resizing a panel based on the size of its text box child using Horizontal/Vertical Layout and Content Size Fitter components.
+- New player controller:
+  - Player controller now works for cross-platform input.
+  - If a gyroscope or touchscreen is available, those are given priority for rotation/movement. If not, the controller falls back to keyboard/mouse support.
+  - Speed and rotation now use relative values from 0 - 1 for better sensitivity support.
+  - Proper state and state chang detection.
+  - Does not account for collision detection currently.
+- New player animation system:
+  - Based on the player's state, the character will switch between upright and swimming positions.
+  - Currently not animated due to a glitch where rotation for euler angles is in the wrong direction (may use Quaternion.AngleAxis() to fix this).
+- Switched platforms from macOS to iOS (for gyroscope/touchscreen input testing).
+- Updated README/thumbnails.
+- Small rocks now have procedural triplanar materials using shader graph:
+  - If the normal of a face is pointing sufficiently upwards and the height is high enough, use a different texture to show moss detailing.
+- Procedural worldspace caustics can now be added to any shader graph material:
+  - Compatible with light direction/color, shadow attenuation, etc.
+  - Strength fades between values based on the distance from the surface.
+- Player skeleton is now mostly improved:
+  - No longer has improper scaling.
+  - Pivot points are fixed.
+- Started working on a new camera controller system:
+  - Can pivot around a target with clamped rotation by using touch controls.
+- Started working on behaviour for dolphins/seagulls:
+  - Jumping out of the water with increasing velocity + gravity deceleration works.
+  - Basic particle system to suggest splashes added.
+- Started working on the water underside/overhead shaders:
+  - Distortion of objects behind the plane from the player's viewpoint works.
+  - Vertex deformation works using noise, but gerstner waves only work using C#.
+- Added environment prototyping models for large rocks:
+  - Added rough colliders based on the rock bounds (to be removed).
+- Added out-of-bounds detection.
+  - Currently using the old player controler.
+- The test level now has a substantial visual environment and out-of-bounds markers.
+- Built a new (working) animation queue system:
+  - Works with euler angles, local euler angles, position, and local position currently.
+  - Can have a time delay.
+  - Can move to a changing target position.
+- The dynamic fog system is now mostly working:
+  - Visibility distance and fog color can now change with height.
+  - Visibility falloff can be adjusted by using a power function.
+
 ## Version 0.3.1 | Published June 2, 2023
 - Built an animation/tweening system:
   - Has property, delay, duration, interpolation type (incomplete)

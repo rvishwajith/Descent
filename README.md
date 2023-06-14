@@ -18,7 +18,7 @@ The goal of this project is to amplify people's interests with one of my persona
 
 Players can learn about and interact with dozens of underwater species and ocean biomes through an entertaining and relazing medium.
 
-## Development
+# Development
 Descent is being developed using Unity 2022.2.9 (Universal Render Pipeline) on macOS.
 The main languages used in development are:
 - C# (Both Mono & .NET)
@@ -27,11 +27,11 @@ The main languages used in development are:
 - Swift (used in SceneKit testing).
 - Metal (used in SceneKit testing).
 
-## Platforms
+## Update Notes
+A complete overview of the development update history can be found at the **UpdateNotes.md** file.
+
+## Target Platforms
 The target platforms for release are **iOS**, **iPadOS**, & **macOS**. Standard mouse and touch input are used, so Android and Windows are possible release targets as well.
 
-## Update Notes
-An overview of the development update history can be found at **UpdateNotes.md**.
-
-## Attributions
+# Attributions
 Attributions will be added soon and will be found at **Attributions.md**.

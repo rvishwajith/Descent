@@ -1,8 +1,27 @@
 # Update Notes
 A complete version history for the master branch is listed below, from newest-to-oldest.
 
-## Version 0.4.1 | In-progress
-- Started switching to the DOTS job system for kelp verlet integration.
+## Version 0.4.1 | Published June 14, 2023
+- Added the "Identity" class:
+  - Replacement for the tag system with support for multiple tags.
+  - Will be used to map objects to tags.
+- Started working on the new (cross-platform) camera controller.
+  - Added the CameraTargetTracking class to replace adding a position history to every object that needs to be tracked.
+  - Added a "mode" identifier for different types of tracking methods in the future (stationary, cutscenes, etc).
+  - Will use the new tagging system instead of using the object's name.
+  - Will support gimbal pivoting via both touchscreen and keyboard/mouse.
+  - Will support deceleration.
+- Started creating the scene delegate:
+  - Will be used to cache all objects in the scene at runtime using different kinds of maps.
+  - Can get objects based on their identities (from the Identity MonoBehaviour).
+- Added some faked lightrays ("godrays") using a particle system that is a child of the camera:
+  - Currently emitted only over time
+  - Can be culled at a given y position
+  - Uses a transparency mask for the distance falloff.
+- Started switching boids to an octree system with (normal layered raycasting):
+  - No DOTS/jobs use yet, will use parallel jobs or a compute shader in the future.
+- Some more project reorganization (removed a few old scenes).
+- Updated README/added thumbnails.
 
 ## Milestone Version 0.4.0 | Published June 13, 2023
 - Major project reorganization:

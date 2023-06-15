@@ -10,14 +10,15 @@ public class PlayerControllerSteeringInput
     private Quaternion initialGyroscopeTilt = Quaternion.identity;
     private float
         gyroscopeSensitivity = 1f,
-        diveTiltMin = 3, diveTiltMax = 35,
-        turnTiltMin = 3, turnTiltMax = 30;
+        diveTiltMin = 2, diveTiltMax = 20,
+        turnTiltMin = 3, turnTiltMax = 35;
 
     public Vector3 GetRotation()
     {
         if (useGyroscope)
+        {
             return GetGyroscopeRotation();
-
+        }
         TryGyroscope();
         return GetMouseInput();
     }
@@ -42,7 +43,8 @@ public class PlayerControllerSteeringInput
             gyroscope = Input.gyro;
             gyroscope.enabled = true;
             gyroscope.updateInterval = 0.016f;
-            // initialTilt = gyroscope.attitude;
+            useGyroscope = true;
+            ResetGyroscopeTilt();
         }
     }
 

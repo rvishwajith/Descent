@@ -7,10 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WallWithCausticsMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 8defd27f3046f41b58b0184a832d811b,
+  m_Name: CommonDolphinMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: ad57de35c43ec4e31b45f576aeccb195,
     type: 3}
-  m_Parent: {fileID: -876546973899608171, guid: 8defd27f3046f41b58b0184a832d811b,
+  m_Parent: {fileID: -876546973899608171, guid: ad57de35c43ec4e31b45f576aeccb195,
     type: 3}
   m_ModifiedSerializedProperties: 2
   m_ValidKeywords: []
@@ -28,11 +28,9 @@ Material:
     m_Ints: []
     m_Floats:
     - _QueueControl: 0
-    - _SurfaceHeight: 20
-    m_Colors:
-    - _AlbedoColor: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
+    m_Colors: []
   m_BuildTextureStacks: []
---- !u!114 &1696481454717082302
+--- !u!114 &9124412249213805953
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

@@ -17,10 +17,18 @@ public class PlayerControllerMovementInput
         if (useTouchscreen)
             UseTouchscreenInput();
         else
+        {
+            TryGetTouchscreen();
             UseKeyboardInput();
-
+        }
         speed = Mathf.Clamp(speed, 0, 1);
         return speed;
+    }
+
+    void TryGetTouchscreen()
+    {
+        if (!useTouchscreen && Input.touchCount > 0)
+            useTouchscreen = true;
     }
 
     private void UseTouchscreenInput()

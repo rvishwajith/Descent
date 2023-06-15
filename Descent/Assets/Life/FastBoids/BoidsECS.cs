@@ -30,9 +30,8 @@ public class BoidsECS : MonoBehaviour
 
     private void Start()
     {
-        boids = new FastBoid[spawnCount];
         cellSize = neighborDist;
-
+        boids = new FastBoid[spawnCount];
         SpawnBoids();
         initialized = true;
     }
@@ -65,7 +64,6 @@ public class BoidsECS : MonoBehaviour
     {
         ResetCells();
         PopulateCells();
-
         UpdateCells(deltaTime);
         MoveBoids(deltaTime);
         WrapBoidPositions();
@@ -73,7 +71,7 @@ public class BoidsECS : MonoBehaviour
 
     private void ResetCells()
     {
-        // Clear the cells.
+        // Clear all of the cell lists.
         foreach (var cell in cellMap.Values)
             cell.Reset();
     }
@@ -83,23 +81,14 @@ public class BoidsECS : MonoBehaviour
         BoidCell currentCell;
         foreach (var boid in boids)
         {
-            // Get the rounded (truncated?) position of the boid, which is the
-            // key for the allocated cell.
-            var truncatedPos = MathUtil.Round(boid.position, multiple: cellSize);
-            // Convert from bottom left to center.
-            if (use2D)
-                truncatedPos += (Vector3.right + Vector3.forward) * cellSize / 2;
-            else
-                truncatedPos += Vector3.one * cellSize / 2;
+            var roundedPos = MathUtil.RoundFloor(boid.position, cellSize);
 
             // Does the cell exist already? If it does not, create and add it.
-            if (!cellMap.TryGetValue(truncatedPos, out currentCell))
+            if (!cellMap.TryGetValue(roundedPos, out currentCell))
             {
                 currentCell = new();
-                cellMap.Add(truncatedPos, currentCell);
-                Debug.Log(
-                    "BoidsECS.PopulateCells(): Added key: " + truncatedPos +
-                    " for position: " + boid.position);
+                cellMap.Add(roundedPos, currentCell);
+                // Debug.Log("BoidsECS.PopulateCells(): Added key: " + roundedPos + " for position: " + boid.position);
             }
             currentCell.Add(boid);
         }
@@ -149,12 +138,10 @@ public class BoidsECS : MonoBehaviour
         foreach (var position in cellMap.Keys)
         {
             var center = position;
-            /*
             if (use2D)
                 center += (Vector3.forward + Vector3.right) * cellSize / 2;
             else
                 center += Vector3.one * cellSize / 2;
-            */
 
             Gizmos.color = Color.gray;
             var count = cellMap.GetValueOrDefault(position).Count();
@@ -164,6 +151,10 @@ public class BoidsECS : MonoBehaviour
                 Handles.Label(center, "" + count);
             }
             Gizmos.DrawWireCube(center, Vector3.one * cellSize);
+            // Gizmos.DrawRay(position, Vector3.right * cellSize);
+            // Gizmos.DrawRay(position, Vector3.forward * cellSize);
+            // Gizmos.DrawRay(position + Vector3.forward * cellSize, Vector3.right * cellSize);
+            // Gizmos.DrawRay(position + Vector3.right * cellSize, Vector3.forward * cellSize);
         }
     }
 }
@@ -188,10 +179,20 @@ class FastBoid
 class BoidCell
 {
     public List<FastBoid> boids = new();
+    public LayerMask collisionMask = LayerMask.GetMask("Boids", "Player");
 
     public void Update(float deltaTime)
     {
+        RaycastHit hit;
         if (Count() == 0) return;
+
+        foreach (var boid in boids)
+        {
+            if (Physics.Raycast(boid.position, boid.forward, out hit, 3f, collisionMask))
+            {
+                boid.forward = boid.transform.right;
+            }
+        }
     }
 
     public int Count()

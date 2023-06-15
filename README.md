@@ -1,15 +1,18 @@
 # Gallery
 ![The new fog system with height-based color and an adjustable falloff curve.](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-4-0-fog2.png)
-**Above:** The new fog system with height-based color and an adjustable falloff curve (v0.4.0).
+The new fog system with height-based color and an adjustable falloff curve (v0.4.0).
 
 ![A prototype of the animation system for large creatures using a manta ray.](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-2-4.png)
-**Above:** A prototype of the animation system for large creatures using a manta ray (v0.2.4).
+A prototype of the animation system for large creatures using a manta ray (v0.2.4).
+
+![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-4-1-godrays.png)
+Faking lightrays using simple particles with a mask and height-based culling (v0.4.1).
 
 ![The custom procedural deformation system using a set of catmull-rom splines.](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/spline-animation-demo.png)
-**Above:** The custom procedural deformation system using a set of catmull-rom splines (v0.3.0).
+The custom procedural deformation system using a set of catmull-rom splines (v0.3.0).
 
 ![Procedural kelp being pushed around by some manta rays using verlet integration.](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-4-0-verlet-kelp2.png)
-**Above:** Procedural kelp being pushed around by some manta rays using verlet integration (v0.4.0).
+Procedural kelp being pushed around by some manta rays using verlet integration (v0.4.0).
 
 # About
 Descent is an underwater exploration and puzzle game which I am solo-developing. The most recent major release is Version 0.4.

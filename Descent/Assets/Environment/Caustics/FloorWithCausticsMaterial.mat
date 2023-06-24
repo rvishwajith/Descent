@@ -12,7 +12,7 @@ Material:
     type: 3}
   m_Parent: {fileID: -876546973899608171, guid: 8defd27f3046f41b58b0184a832d811b,
     type: 3}
-  m_ModifiedSerializedProperties: 2
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 2
@@ -28,9 +28,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _QueueControl: 0
-    - _UseCaustics: 1
-    m_Colors:
-    - _AlbedoColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
+    m_Colors: []
   m_BuildTextureStacks: []
 --- !u!114 &1696481454717082302
 MonoBehaviour:

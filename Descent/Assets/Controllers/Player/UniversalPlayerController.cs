@@ -9,16 +9,16 @@ public class UniversalPlayerController : MonoBehaviour
     private float turnSpeedMax = 75, diveSpeedMax = 45;
 
     private PlayerControllerMovementInput movementInput;
-    private float speed = 0, moveSpeedMax = 7;
+    [HideInInspector] public float speed = 0, moveSpeedMax = 8;
 
     private UniversalPlayerAnimator animator;
-    private int state = 0;
+    [HideInInspector] public int state = 0; // -1 = Disabled, 0 = Idle, 1 = Swimming, 2 = Boosting
 
     private void Start()
     {
         steeringInput = new();
         movementInput = new();
-        animator = new(this.transform);
+        animator = new(this);
 
         StartCoroutine(animator.UprightState());
     }
@@ -28,7 +28,6 @@ public class UniversalPlayerController : MonoBehaviour
         ApplyMovement();
 
         bool moving = (state == 1 || state == 2);
-
         if (!moving)
         {
             if (speed > 0)
@@ -52,11 +51,12 @@ public class UniversalPlayerController : MonoBehaviour
                 else if (speed > 0) ApplyRotation();
             }
         }
+        animator.Update();
     }
 
     private void NormalMovement()
     {
-        if (steeringInput.useGyroscope && Input.GetKey(KeyCode.Space))
+        if (steeringInput.useGyroscope && Input.GetKey(KeyCode.R))
         {
             steeringInput.ResetGyroscopeTilt();
             transform.rotation = Quaternion.identity;
@@ -66,7 +66,7 @@ public class UniversalPlayerController : MonoBehaviour
 
     private void ApplyMovement()
     {
-        speed = Mathf.Lerp(0, moveSpeedMax, movementInput.GetRelativeSpeed());
+        speed = movementInput.GetRelativeSpeed() * moveSpeedMax;
         transform.position += transform.forward * speed * Time.deltaTime;
     }
 
@@ -78,47 +78,5 @@ public class UniversalPlayerController : MonoBehaviour
         angles += rotation * Time.deltaTime;
         angles.x = Mathf.Clamp(angles.x, -70, 70);
         transform.rotation = Quaternion.Euler(angles.x, angles.y, 0);
-    }
-}
-
-class UniversalPlayerAnimator
-{
-    private Transform body;
-    private Transform headSwivel, head;
-
-    public UniversalPlayerAnimator(Transform player)
-    {
-        body = player.Find("Body");
-
-        headSwivel = body.Find("Skeleton/HeadSwivel");
-        head = headSwivel.Find("Head");
-    }
-
-    public IEnumerator UprightState()
-    {
-        var delay = 0.015f;
-        for (float t = 0; t <= 1; t += 1)
-        {
-            body.localEulerAngles = Vector3.right * Mathf.SmoothStep(body.localEulerAngles.x, -90, t);
-            headSwivel.localEulerAngles = Vector3.right * Mathf.SmoothStep(headSwivel.localEulerAngles.x, 0, t);
-            head.localEulerAngles = Vector3.right * Mathf.SmoothStep(head.localEulerAngles.x, 90, t);
-
-            yield return new WaitForSeconds(delay);
-        }
-        yield return null;
-    }
-
-    public IEnumerator SwimmingState()
-    {
-        var delay = 0.015f;
-        for (float t = 0; t <= 1; t += 1)
-        {
-            body.localEulerAngles = Vector3.right * Mathf.SmoothStep(body.localEulerAngles.x, 0, t);
-            headSwivel.localEulerAngles = Vector3.right * Mathf.SmoothStep(headSwivel.localEulerAngles.x, -30, t);
-            head.localEulerAngles = Vector3.right * Mathf.SmoothStep(head.localEulerAngles.x, 45, t);
-
-            yield return new WaitForSeconds(delay);
-        }
-        yield return null;
     }
 }

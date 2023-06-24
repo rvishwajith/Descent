@@ -27,6 +27,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
+    - _NoCausticsHeight: -5
     - _QueueControl: 0
     - _SurfaceHeight: 20
     m_Colors:

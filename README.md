@@ -1,3 +1,12 @@
+![Thumbnail](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/thumbnail.png)
+
+# About
+Descent is an underwater exploration game that I'm solo developing using Unity. The most recent major release is Version 0.4.
+
+The goal of this project is to amplify people's interests with one of my personal passions, marine biology through games. Instead of designing a horror or survival game as underwater games tend to be, Descent is designed to be peaceful, simple, and beautiful.
+
+Players can learn about and interact with dozens of underwater species and ocean biomes through an entertaining and relazing medium.
+
 # Gallery
 ![The new fog system with height-based color and an adjustable falloff curve.](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-4-0-fog2.png)
 The new fog system with height-based color and an adjustable falloff curve (v0.4.0).
@@ -13,13 +22,6 @@ The custom procedural deformation system using a set of catmull-rom splines (v0.
 
 ![Procedural kelp being pushed around by some manta rays using verlet integration.](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-4-0-verlet-kelp2.png)
 Procedural kelp being pushed around by some manta rays using verlet integration (v0.4.0).
-
-# About
-Descent is an underwater exploration and puzzle game which I am solo-developing. The most recent major release is Version 0.4.
-
-The goal of this project is to amplify people's interests with one of my personal passions, marine biology through games. Instead of designing a horror or survival game as underwater games tend to be, Descent is designed to be peaceful, simple, and beautiful.
-
-Players can learn about and interact with dozens of underwater species and ocean biomes through an entertaining and relazing medium.
 
 # Development
 Descent is being developed using Unity 2022.2.9 (Universal Render Pipeline) on macOS.

@@ -1,5 +1,24 @@
 # Update Notes
-A complete version history for the master branch is listed below, from newest-to-oldest.
+A complete version update history of Master commits (newest-first).
+
+## Version 0.4.2 | Published June 24, 2023
+- Made some changes to the fog and caustics system:
+  - Fixed a glitch where the caustics faloff would not work properly.
+  - Some testing of the world position approximation for both the underside and surface of the waves.
+  - Added caustics materials using the AddCaustics subgraph to different parts of the terrain.
+- Started overhauling the dynamic kelp system:
+  - Now uses entities and colliders/spherecasts instead of instantiated transforms for future parallel job system migration.
+  - Supports (static) kelp stalks with variable dynamic kelp leaves that point in any direction.
+  - Kelp leaf deformation testing using a single spline now works.
+  - Leaf entities work properly with sphere collision checks even with low integration count and have adjustable deceleration
+- Minor updates to the player controller.
+- More progress on fast boids:
+  - Started moving towards a system using entities instead of insantiation for future parallel job system migration
+  - Currently still uses instantiation, but will be replaced with DrawMeshInstanced() in the future with a fish deformation material (using a property block for speed/acceleration animation) for much better performance.
+- General project cleanup/organization:
+  - Removed some empty/old test scenes and scripts, oncluding the entire slow boids implementation.
+  - Started using namespaces in scripts.
+- Added the main repostitory thumbnail.
 
 ## Version 0.4.1 | Published June 14, 2023
 - Added the "Identity" class:
@@ -23,7 +42,7 @@ A complete version history for the master branch is listed below, from newest-to
 - Some more project reorganization (removed a few old scenes).
 - Updated README/added thumbnails.
 
-## Milestone Version 0.4.0 | Published June 13, 2023
+# Milestone Version 0.4.0 | Published June 13, 2023
 - Major project reorganization:
   - All life is now in subfolders under "Life".
   - Utilities folder added.

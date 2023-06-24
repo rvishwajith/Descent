@@ -4340,7 +4340,7 @@
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.CategoryData",
     "m_ObjectId": "a7978762861e4e7db3b530a34ab06ca0",
-    "m_Name": "Visbility",
+    "m_Name": "Visibility",
     "m_ChildObjectList": [
         {
             "m_Id": "34505ff6855c43f09870a14d2a57a6df"

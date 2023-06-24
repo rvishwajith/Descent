@@ -27,10 +27,10 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _FogPower: 1
+    - _FogPower: 1.25
     - _SeaFloorDepth: -100
     - _SeaFloorVisibilityDistance: 50
-    - _SurfaceHeight: 10
+    - _SurfaceHeight: 70.05
     - _SurfaceVisibilityDistance: 80
     m_Colors: []
   m_BuildTextureStacks: []

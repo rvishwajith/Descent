@@ -7,7 +7,8 @@ public class PlayerControllerMovementInput
 
     private float
         speed = 0,
-        acceleration = 0.2f,
+        desiredSpeed = 0,
+        acceleration = 0.25f,
         deceleration = 1.25f;
 
     private KeyCode moveKey = KeyCode.LeftShift;

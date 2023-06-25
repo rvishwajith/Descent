@@ -1,5 +1,15 @@
 # Update Notes
-A complete version update history of Master commits (newest-first).
+A complete version update history of Master commits (newest-first). The latest major update was **Version 0.4.0**.
+
+## Version 0.4.3 | Published June 24, 2023
+- Added a new hammerhead shark prototyping mesh with fixed normals and origin at the minimum Z bounds.
+- Started rebuilding the spline procedural animation for large creatures:
+  - Added a test program (DeformOnSpline/MeshDeformer) for deformation of a mesh using a single spline.
+  - Vertex deformation works almost perfectly (tested on hammerhead mesh) when mesh origin is at minimum z (mesh pivot point is the head).
+  - Vertex deformation distorts when the parent transform is rotated away from the world forward vector (will be fixed using transform's local to world direction later when splines use entity system).
+  - Mesh currently scales based on the spline length, may be reversed later.
+- Some project cleanup/organization:
+  - Removed some of the old procedural animation files and moved others into an archive folder under "Testing".
 
 ## Version 0.4.2 | Published June 24, 2023
 - Made some changes to the fog and caustics system:

@@ -1,5 +1,41 @@
 # Update Notes
-A complete version update history of Master commits (newest-first). The latest major update was **Version 0.4.0**.
+The complete version history is listed below (newest-first).
+
+# Milestone Version 0.5.0 | In Progress
+![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-5-0-boids.png)
+**The new flocking system running with collision avoidance in realtime.**
+- Created a completely new rig system for the player that works properly:
+  - Proper rig layering and corrected scaling/parenting on all of the bones
+  - Hands and legs now have IK targets
+  - Added a custom Gizmo to draw rig heirarchies with labels
+- Created a new player controller
+  - Functionality is the same as cleaner version of UniversalPlayerController
+  - Player scripts are now in the Player namespace
+  - Player movement and steering are renamed and put under the proper namespace now
+  - Touch/gyroscope checks are now faster and called every frame (rejected instantly if unnecessary)
+- Created a new camera controller:
+  - Camera controls are now in the Camera namespace (DynamicCamera)
+- Completely overhauled the boids system, which is now mostly functional:
+  - Now uses a compute shader to greatly improve calculation times.
+  - Now is a set of 2 components (Spawner & Manager) which takes in a settings asset for instead of using preset values.
+  - Spawner/Manager components may be combined eventually and boid class may be removed when GPU mesh instancing is used.
+  - All rules now work correctly with any weights.
+  - Predator avoidance now works, but is not layer/distance dependent unlike before (will be fixed).
+  - Collision perception distance, neighbor avoidance distance, etc. are now adjustable.
+  - Collision detection now works with any LayerMask object.
+  - Staying inside bounds/raycast avoidance now works.
+  - Perception now has an angular FOV instead of being purely distance based.
+  - Note: May switch from compute shader to jobs system later, or reduce the thread count.
+- Added scripts for drawing custom Gizmos (pyramid, boid, bone)
+- Major project cleanup/organization:
+  - Removed all of the old player, camera, and boids scripts
+  - Removed lots of testing scenes
+  - Most classes are now under a namespace
+- Added third party packages:
+  - DOTWeen for easier animation
+  - AnimationRigging (Official) for player rig IK
+- Added thumbnails to About and UpdateNotes.
+- Added some attributions.
 
 ## Version 0.4.3 | Published June 24, 2023
 - Added a new hammerhead shark prototyping mesh with fixed normals and origin at the minimum Z bounds.
@@ -31,6 +67,8 @@ A complete version update history of Master commits (newest-first). The latest m
 - Added the main repostitory thumbnail.
 
 ## Version 0.4.1 | Published June 14, 2023
+[](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-4-1-godrays.png)
+**Faking lightrays using simple particles.**
 - Added the "Identity" class:
   - Replacement for the tag system with support for multiple tags.
   - Will be used to map objects to tags.
@@ -53,6 +91,13 @@ A complete version update history of Master commits (newest-first). The latest m
 - Updated README/added thumbnails.
 
 # Milestone Version 0.4.0 | Published June 13, 2023
+![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-4-0-fog2.png)
+**The new fog system.**
+![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-4-0-verlet-kelp2.png)
+**Dynamic procedural kelp using verlet integration.**
+- The dynamic fog system is now mostly working:
+  - Visibility distance and fog color can now change with height.
+  - Visibility falloff can be adjusted by using a power function.
 - Major project reorganization:
   - All life is now in subfolders under "Life".
   - Utilities folder added.
@@ -107,9 +152,6 @@ A complete version update history of Master commits (newest-first). The latest m
   - Works with euler angles, local euler angles, position, and local position currently.
   - Can have a time delay.
   - Can move to a changing target position.
-- The dynamic fog system is now mostly working:
-  - Visibility distance and fog color can now change with height.
-  - Visibility falloff can be adjusted by using a power function.
 
 ## Version 0.3.1 | Published June 2, 2023
 - Built an animation/tweening system:
@@ -126,6 +168,8 @@ A complete version update history of Master commits (newest-first). The latest m
 - General cleanup/renaming + removed old player controller class (PlayerController2 -> PlayerController).
 
 # Milestone Version 0.3.0 | Published June 1, 2023
+![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/spline-animation-demo.png)
+**Procedural deformation system using linked catmull-rom splines.**
 - Changed Unity version from 2022.2.9 to 2022.3.0 and rebuilt library folder + removed packages.
 - Nearly completed spline-based deformation system (in C# form):
   - Works with a target following deformation spine.
@@ -166,6 +210,8 @@ A complete version update history of Master commits (newest-first). The latest m
   - Now panels will only show up in the proper context (ex. only observe if an observable creature is on the screen and nearby).
 
 ## Version 0.2.4 | Published May 31, 2023
+![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-2-4.png)
+**A prototype of the animation system for using a manta ray.**
 - Panels and buttons can now be added to the UI manager and can be toggled as well.
 - Added rideable creature tag:
   - For creatures within the viewport and sufficiently close to the player, the nearest rideable creature can be interacted with using a button.
@@ -288,6 +334,6 @@ A complete version update history of Master commits (newest-first). The latest m
 - Added a shader to cover all points below a gradient:
   - Will be used for a future water line at the water surface.
 
-# Project Creation | May 18, 2023.
+# Project Created on May 18, 2023.
 
 

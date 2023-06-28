@@ -1,59 +1,60 @@
-﻿using System;
-using UnityEngine;
-using System.Collections;
+﻿using UnityEngine;
 
-public class Door : MonoBehaviour
+namespace Interactable
 {
-    [Header("Panels")]
-    public Transform right;
-    public Transform left;
+    using Utilities;
 
-    private int state; // Closed
-    private float closedDist = 0.1f, openDist = 3.2f;
-    private float timeToOpen = 6.8f;
-
-    public void Start()
+    public class Door : MonoBehaviour
     {
-        Close();
-    }
+        [Header("Panels")]
+        public Transform right;
+        public Transform left;
 
-    public void Close()
-    {
-        state = 0;
-        right.localPosition = Vector3.right * closedDist;
-        left.localPosition = Vector3.left * closedDist;
-    }
+        private int state = 0; // Closed
+        private float widthClosed = 0.1f, widthOpen = 3.2f, openDuration = 6.8f;
 
-    public void Open(float delay)
-    {
-        Invoke("Open", delay);
-    }
+        public void Awake()
+        {
+            Close();
+        }
 
-    public void Open()
-    {
-        state = 1;
-        Camera.main.GetComponent<CameraController>().screenShakeStrength = 0.3f;
-        transform.GetComponent<AudioSource>().Play();
-        Delegates.Animation.Animate(
-            right,
-            property: "LocalPosition",
-            start: right.localPosition,
-            end: Vector3.right * openDist,
-            duration: timeToOpen);
-        Delegates.Animation.Animate(
-            left,
-            property: "LocalPosition",
-            start: left.localPosition,
-            end: Vector3.left * openDist,
-            duration: timeToOpen);
-        Invoke("DidOpen", timeToOpen);
-    }
+        public void Close()
+        {
+            state = 0;
+            right.localPosition = Vector3.right * widthClosed;
+            left.localPosition = Vector3.left * widthClosed;
+        }
 
-    void DidOpen()
-    {
-        Camera.main.GetComponent<CameraController>().screenShakeStrength = 0f;
-        Debug.Log("Door opened.");
-        state = 2;
+        public void Open(float delay)
+        {
+            if (state == 0)
+                Invoke("Open", delay);
+        }
+
+        public void Open()
+        {
+            state = 1;
+            transform.GetComponent<AudioSource>().Play();
+            References.Animation.Animate(
+                right,
+                property: "LocalPosition",
+                start: right.localPosition,
+                end: Vector3.right * widthOpen,
+                duration: openDuration);
+            References.Animation.Animate(
+                left,
+                property: "LocalPosition",
+                start: left.localPosition,
+                end: Vector3.left * widthOpen,
+                duration: openDuration);
+            Invoke("DidOpen", openDuration);
+        }
+
+        void DidOpen()
+        {
+            Debug.Log("Door opened.");
+            state = 2;
+        }
     }
 }
 

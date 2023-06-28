@@ -27,9 +27,9 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _NoCausticsHeight: -5
+    - _NoCausticsHeight: 0
     - _QueueControl: 0
-    - _SurfaceHeight: 20
+    - _SurfaceHeight: 15
     m_Colors:
     - _AlbedoColor: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
   m_BuildTextureStacks: []

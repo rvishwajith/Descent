@@ -28,9 +28,9 @@ Material:
     m_Ints: []
     m_Floats:
     - _FogPower: 1.25
-    - _SeaFloorDepth: -100
-    - _SeaFloorVisibilityDistance: 50
-    - _SurfaceHeight: 70.05
-    - _SurfaceVisibilityDistance: 80
+    - _SeaFloorDepth: -40
+    - _SeaFloorVisibilityDistance: 20
+    - _SurfaceHeight: 120
+    - _SurfaceVisibilityDistance: 100
     m_Colors: []
   m_BuildTextureStacks: []

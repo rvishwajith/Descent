@@ -2,39 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorTrigger : MonoBehaviour
+namespace Interactable
 {
-    [Header("Targets")]
-    public Transform doorTarget;
-    public Transform animationTarget;
-
-    private float zRotationSpeed = 90f, // Degrees per second.
-        xRotationSpeed = 30f,
-        yRotationSpeed = 15f;
-
-    private float yPositionCenter = 0f, // Meters
-        yPositionAmp = 0.3f,
-        yPositionSpeed = 1f;
-
-    void Update()
+    public class DoorTrigger : MonoBehaviour
     {
-        var yPosition = yPositionCenter + Mathf.Sin(Time.time * yPositionSpeed) * yPositionAmp;
-        animationTarget.localPosition = new(0, yPosition, 0);
+        public Door door;
+        public Transform orb;
 
-        var xRotation = xRotationSpeed * Time.time;
-        var yRotation = yRotationSpeed * Time.time;
-        var zRotation = zRotationSpeed * Time.time;
-        animationTarget.localEulerAngles = new Vector3(xRotation, yRotation, zRotation);
-    }
+        private float zRotationSpeed = 90f, // Degrees per second.
+            xRotationSpeed = 30f,
+            yRotationSpeed = 15f;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        // Debug.Log("Triggered: " + other.transform.name);
-        Activate();
-    }
+        private float yCenter = 0f, yOffsetDist = 0.3f, yOffsetSpeed = 1f;
 
-    void Activate()
-    {
-        doorTarget.GetComponent<Door>().Open(1.5f);
+        void Update()
+        {
+            orb.localPosition = Vector3.up * (yCenter + Mathf.Sin(Time.time * yOffsetSpeed) * yOffsetDist);
+            orb.localEulerAngles = new Vector3(xRotationSpeed, yRotationSpeed, zRotationSpeed) * Time.time;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Interact();
+        }
+
+        public void Interact()
+        {
+            door.Open(1.5f);
+        }
     }
 }

@@ -32,7 +32,7 @@ The version history is listed below (latest-first).
   - Doors/door triggers now use DOTween instead of the old animation delegate.
 - Added placeholder skyboxes from an asset package.
 
-# Milestone Version 0.5.0 | June 27, 2023
+# Milestone Version 0.5 | June 27, 2023
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-5-0-boids.png)
 **The new flocking system running with collision avoidance in realtime.**
 - Created a completely new rig system for the player that works properly:
@@ -121,7 +121,7 @@ The version history is listed below (latest-first).
 - Some more project reorganization (removed a few old scenes).
 - Updated README/added thumbnails.
 
-# Milestone Version 0.4.0 | June 13, 2023
+# Milestone Version 0.4 | June 13, 2023
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-4-0-fog2.png)
 **The new fog system.**
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-4-0-verlet-kelp2.png)
@@ -198,7 +198,7 @@ The version history is listed below (latest-first).
 - Added a basic starting menu scene.
 - General cleanup/renaming + removed old player controller class (PlayerController2 -> PlayerController).
 
-# Milestone Version 0.3.0 | June 1, 2023
+# Milestone Version 0.3 | June 1, 2023
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/spline-animation-demo.png)
 **Procedural deformation system using linked catmull-rom splines.**
 - Changed Unity version from 2022.2.9 to 2022.3.0 and rebuilt library folder + removed packages.
@@ -281,7 +281,7 @@ The version history is listed below (latest-first).
 - Updated manta ray procedural animation:
   - Vertices now pivot around the center point based on a gradient and an angle.
 
-# Milestone Version 0.2.0 | May 30, 2023
+# Milestone Version 0.2 | May 30, 2023
 - Added (N^2) boids behaviour:
   - Center of mass
   - Match velocity
@@ -365,6 +365,4 @@ The version history is listed below (latest-first).
 - Added a shader to cover all points below a gradient:
   - Will be used for a future water line at the water surface.
 
-# Project Created on May 18, 2023.
-
-
+# Version 0.1 (Project Creation) | May 18, 2023

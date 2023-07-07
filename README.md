@@ -9,11 +9,11 @@ Descent is being developed using Unity 2022.2.9 (URP) on macOS. The most recent 
 
 ## Gallery
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-4-0-fog2.png)
-Custom fog system with height-based color and an adjustable falloff curve (v0.4.0).
+Custom fog system with height-based color and an adjustable falloff curve (v0.4).
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-2-4.png)
 A prototype of the custom animation system for large creatures using a manta ray (v0.2.4).
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-5-0-boids.png)
-Dynamic flocking (400 object instances) running on a compute shader with collision avoidance in realtime (v0.5.0).
+Dynamic flocking (400 object instances) running on a compute shader with collision avoidance in realtime (v0.5).
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-4-1-godrays.png)
 Faking lightrays using simple particles with a mask and height-based culling (v0.4.1).
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/spline-animation-demo.png)

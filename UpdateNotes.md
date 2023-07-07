@@ -98,7 +98,7 @@ The version history is listed below (latest-first).
 - Added the main repostitory thumbnail.
 
 ## Version 0.4.1 | June 14, 2023
-[](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-4-1-godrays.png)
+![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-4-1-godrays.png)
 **Faking lightrays using simple particles.**
 - Added the "Identity" class:
   - Replacement for the tag system with support for multiple tags.

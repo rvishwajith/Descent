@@ -14,12 +14,12 @@ TagManager:
   - Player
   - Water
   - UI
-  - Boids
+  - FlockingCollisions
   - LargeAnimals
-  - Surface
+  - WaterSurface
   - Terrain
-  - Bounds
-  - 
+  - PlayerOutOfBounds
+  - Reflectable
   - 
   - 
   - 

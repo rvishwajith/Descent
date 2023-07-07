@@ -1,11 +1,36 @@
 # Update Notes
-The complete version history is listed below (newest-first).
+The version history is listed below (latest-first).
 
-## Version 0.5.1 | In Progress
+## Version 0.5.1 | July 7, 2023
+![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-5-1-single-spline-deform.png)
+**Single spline deformation of the mesh with rotation and scaling support.**
 - Boids now use GPU Instancing instead of the SRP batcher for rendering (Graphics.DrawMeshInstanced):
   - Reduced number of batches to from ~1400 (2N) to 1.
   - May be changed to use multiple sets batches in the future (for LOD support).
   - No frustum tests/occlusion culling yet.
+- Created the VirtualTransform class:
+  - Meant to replace a transform without any instantiation.
+  - Will eventually take the place of normal transforms whenever manual GPU instancing is used.
+- Changes to the player controller:
+  - Settings for the controller (and future controllers) now use scriptable object assets (the boids controller already does this) to save settinggs.
+  - IK was removed, may be re-added later.
+  - Started switching to an animation blend tree for animations.
+  - Movement and steering controllers are cleaned up and use data from the scriptable object settings instead of manually checking input types/keybinds.
+- Progress on the new mesh deformation system (CPU side):
+  - Mesh can now deform successfully on a single spline.
+  - Rotation and scaling now work as well.
+  - Note: Testing with offsets for transformations on the Transform point array has not been tested and might not work yet (will need to convert mesh points to/from world space).
+  - Started working on vertex deformation on a set of splines (Curve class with a smaller spline struct)
+- Progress on the new water surface shaders:
+  - Objects from above the surface are now distorted when viewing them from below the water by using 2 noise textures and the view direction/distance.
+  - Also works for the opposite direction (not implemented yet)
+  - Water surface can now render reflections using a reflection probe.
+  - Added a package for an example of a good URP water shader (didn't work well, extras will be removed later).
+- Lots of project cleanup:
+  - Most of the old test scenes/scripts have all been removed, such as the old controllers, boids, deformation, etc.
+  - Renamed/reorganized some of the utility/helper classes, such as math and custom gizmos.
+  - Doors/door triggers now use DOTween instead of the old animation delegate.
+- Added placeholder skyboxes from an asset package.
 
 # Milestone Version 0.5.0 | June 27, 2023
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-5-0-boids.png)

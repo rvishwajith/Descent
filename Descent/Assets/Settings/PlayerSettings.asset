@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: PlayerSettings
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSettings
+  acceleration: 0.2
+  deceleration: -0.7
+  speedMax: 8
+  diveMin: -85
+  diveMax: 85
+  turnMultiplier: 75
+  diveMultiplier: 50
+  checkForTouchMovement: 0
+  checkForKeyboardMovement: 0
+  moveKey: 304
+  boostKey: 98
+  checkForGyroSteering: 0
+  gyroSteeringSensitivity: 1
+  checkForKeyboardSteering: 0
+  keyboardSteeringSensitivity: 2
+  checkForMouseSteering: 1
+  mouseSteeringSensitivity: 1

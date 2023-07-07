@@ -366,3 +366,4 @@ The version history is listed below (latest-first).
   - Will be used for a future water line at the water surface.
 
 # Version 0.1 (Project Creation) | May 18, 2023
+![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/thumbnail.png)

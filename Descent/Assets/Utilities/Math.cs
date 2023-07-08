@@ -1,46 +1,73 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Utilities
 {
     public static class Math
     {
-        public static float Round(float value, float multiple = 1)
+        public static class Vector
         {
-            var remainder = value % multiple;
-            var result = value - remainder;
-            if (remainder >= (multiple / 2))
-                result += multiple;
-            return result;
+            public static Vector3 Round(Vector3 vector, int decimals = 2)
+            {
+                float x = Float.Round(vector.x, decimals),
+                    y = Float.Round(vector.y, decimals),
+                    z = Float.Round(vector.z, decimals);
+                return new Vector3(x, y, z);
+            }
+
+            public static Quaternion Round(Quaternion value, int decimals = 2)
+            {
+                float x = Float.Round(value.x, decimals),
+                    y = Float.Round(value.y, decimals),
+                    z = Float.Round(value.z, decimals),
+                    w = Float.Round(value.w, decimals);
+                return new Quaternion(x, y, z, w);
+            }
+
+            public static Vector3 Floor(Vector3 vector, float interval = 1)
+            {
+                float x = Float.Floor(vector.x, interval),
+                    y = Float.Floor(vector.y, interval),
+                    z = Float.Floor(vector.z, interval);
+                return new Vector3(x, y, z);
+            }
         }
 
-        public static Vector3 Round(Vector3 vector, float multiple = 1)
+        public static class Float
         {
-            return new(
-                Round(vector.x, multiple: multiple),
-                Round(vector.y, multiple: multiple),
-                Round(vector.z, multiple: multiple));
+            public static float Round(float value, int decimals = 2)
+            {
+                float multiplier = Mathf.Pow(10, decimals);
+                return ((int)(value * multiplier) / multiplier);
+            }
+
+            public static float Floor(float value, float interval = 1)
+            {
+                var remainder = value % interval;
+                var result = value - remainder;
+                if (value < 0 && remainder != 0)
+                    result -= interval;
+                return result;
+            }
         }
 
-        public static float RoundDown(float value, float multiple = 1)
+        public static class Arrays
         {
-            var remainder = value % multiple;
-            var result = value - remainder;
-            if (value < 0 && remainder != 0)
-                result -= multiple;
-            return result;
+            public static int Wrap(int index, int length)
+            {
+                return index % length;
+            }
+
+            public static int Wrap(int index, Array a)
+            {
+                return index % a.Length;
+            }
         }
 
-        public static Vector3 RoundDown(Vector3 vector, float multiple = 1)
+        // Artifact
+        public static int Wrap(int index, int length)
         {
-            return new(
-                RoundDown(vector.x, multiple: multiple),
-                RoundDown(vector.y, multiple: multiple),
-                RoundDown(vector.z, multiple: multiple));
-        }
-
-        public static int Wrap(int index, int arrLength)
-        {
-            return index % arrLength;
+            return Arrays.Wrap(index, length);
         }
     }
 }

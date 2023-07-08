@@ -4,6 +4,12 @@ namespace Utilities
 {
     public static class Gizmo
     {
+        public static Color color
+        {
+            get { return Gizmos.color; }
+            set { Gizmos.color = value; }
+        }
+
         public static void Bone(Transform root, Transform child)
         {
             Gizmos.DrawWireSphere(root.position, 0.03f);

@@ -1,6 +1,18 @@
 # Update Notes
 The version history is listed below (latest-first).
 
+## Version 0.5.2 | In Progress
+![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-5-2-virtual-transform.png)
+**Virtual transform testing.**
+- VirtualTransform (now in Component namespace) is complete and seems to be working properly:
+  - Tested on an object using the VirtualMatrixAlias
+  - Works properly for rotation, translation, scale.
+  - LookAt(point) works properly with/without world up.
+  - Note: LookAt(Transform) is not implemented and will only be added if necessary.
+  - World Matrix seems to match the Transform.localToWorldMatrix() exactly.
+  - Note: If necessary, a new transformation matrix will not be generated on every Get and will instead be updated only if rotation/position/scale values are changed.
+- Some testing and custom compoenent scenes/scripts were moved or renamed.
+
 ## Version 0.5.1 | July 7, 2023
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-5-1-single-spline-deform.png)
 **Single spline deformation of the mesh with rotation and scaling support.**
@@ -31,6 +43,7 @@ The version history is listed below (latest-first).
   - Renamed/reorganized some of the utility/helper classes, such as math and custom gizmos.
   - Doors/door triggers now use DOTween instead of the old animation delegate.
 - Added placeholder skyboxes from an asset package.
+- Updated README/added thumbnails.
 
 # Milestone Version 0.5 | June 27, 2023
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-5-0-boids.png)
@@ -90,6 +103,7 @@ The version history is listed below (latest-first).
   - Leaf entities work properly with sphere collision checks even with low integration count and have adjustable deceleration
 - Minor updates to the player controller.
 - More progress on fast boids:
+- Updated Mac test build to 0.5.
   - Started moving towards a system using entities instead of insantiation for future parallel job system migration
   - Currently still uses instantiation, but will be replaced with DrawMeshInstanced() in the future with a fish deformation material (using a property block for speed/acceleration animation) for much better performance.
 - General project cleanup/organization:
@@ -133,6 +147,7 @@ The version history is listed below (latest-first).
   - All life is now in subfolders under "Life".
   - Utilities folder added.
   - Camera/player controllers now under "Controller".
+- Updated Mac test build to 0.4.
 - Dynamic kelp is now implemented:
   - Works with both creatures and the player (layer-based)
   - Note: currently works individually for kelp deformation and leaf deformation, but not both together.

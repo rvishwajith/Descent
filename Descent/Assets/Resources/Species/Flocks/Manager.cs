@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Life
+namespace Species
 {
     namespace Flocks
     {
@@ -32,7 +30,7 @@ namespace Life
             private Boid[] boids;
             private Matrix4x4[] matrices;
 
-            void Start()
+            private void Start()
             {
                 Spawner spawner;
                 if (TryGetComponent<Spawner>(out spawner))
@@ -115,7 +113,7 @@ namespace Life
     }
 }
 
-namespace Life
+namespace Species
 {
     namespace Flocks
     {

@@ -1,7 +1,7 @@
 # Update Notes
 The version history is listed below (latest-first).
 
-## Version 0.5.2 | In Progress
+## Version 0.5.2 | July 12, 2023
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-5-2-virtual-transform.png)
 **Virtual transform testing.**
 - VirtualTransform (now in Component namespace) is complete and seems to be working properly:
@@ -10,8 +10,17 @@ The version history is listed below (latest-first).
   - LookAt(point) works properly with/without world up.
   - Note: LookAt(Transform) is not implemented and will only be added if necessary.
   - World Matrix seems to match the Transform.localToWorldMatrix() exactly.
-  - Note: If necessary, a new transformation matrix will not be generated on every Get and will instead be updated only if rotation/position/scale values are changed.
-- Some testing and custom compoenent scenes/scripts were moved or renamed.
+  - If necessary, a new transformation matrix will not be generated on every Get and will instead be updated only if rotation/position/scale values are changed.
+- Some testing scenes and custom component scripts were moved or renamed.
+- Boids are now working with virtual transforms:
+  - Not noticing a signficant performance gain
+  - Note: Reducing compute shader thread size to 512 (from 1024) did increase performance.
+- Started testing procedural animation for flippers:
+  - Seems to work fine using a 4 point verlet rope simulation.
+- Worked on shader for small fish animation:
+  - Works for giant trevally partically but not completely (rotation on y, z, and dependent z).
+  - Does not work with GPU instancing yet!
+- Added the format utility class and "Models" resource folder.
 
 ## Version 0.5.1 | July 7, 2023
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-5-1-single-spline-deform.png)

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Life
+namespace Species
 {
     namespace Flocks
     {

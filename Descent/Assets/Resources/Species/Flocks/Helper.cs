@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Life
+namespace Species
 {
     namespace Flocks
     {
         public static class Helper
         {
             // Default: 300.
-            const int NUM_DIRECTIONS = 300;
+            const int NUM_DIRECTIONS = 200;
             public static readonly Vector3[] DIRECTIONS;
 
             static Helper()

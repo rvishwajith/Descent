@@ -2,10 +2,10 @@
 using UnityEngine.UIElements;
 using Utilities;
 
-/* VirtualTransform
+/* Components.VirtualTransform
  * 
  * Description:
- * A custom version of the Transform component that works without any Instantiation required (independent of GameObjects). Since it does not use any GameObjects, it also cannot have any parents/children, which means all transofrmations are world space only and local position/rotation/lossy scale cannot exist.
+ * A custom version of the Transform component that works without any Instantiation required (independent of GameObjects). Since it does not use the heirarchy, it also cannot have any parents/children, which means all transofrmations are world space only and local position/rotation/lossy scale cannot exist.
  * 
  * Use in combination with GPU mesh instancing, because a transformation matrix array is required but using thousands of standard Transforms for matrices is very expensive. The planned use cases are:
  * 1. Flocking objects (boid simulations)
@@ -14,14 +14,13 @@ using Utilities;
  *    Currently functions partially using only a position, so neither virtual transforms nor instances are beign sued here. 
  * 
  * Attributions:
- * 1. Unity - Transform (MonoBehaviour) Source Code:
+ * 1. Unity - Transform (MonoBehaviour) Source:
  * https://github.com/Unity-Technologies/UnityCsReference/blob/master/Runtime/Transform/ScriptBindings/Transform.bindings.cs
  */
 
 namespace Components
 {
-
-    class VirtualTransform
+    public class VirtualTransform
     {
         private InternalData innerData = new();
         class InternalData
@@ -29,10 +28,11 @@ namespace Components
             public Vector3 position = Vector3.zero;
             public Quaternion rotation = Quaternion.identity;
             public Vector3 scale = Vector3.one;
+            public Matrix4x4 matrix;
 
             public InternalData()
             {
-                // Debug.Log("VirtualTransform.(): Created virtual transform.");
+                // Debug.Log("Created VirtualTransform.");
             }
         }
 
@@ -72,7 +72,6 @@ namespace Components
             get { return rotation * Vector3.forward; }
             set { rotation = Quaternion.LookRotation(value); }
         }
-
         public Matrix4x4 matrix
         {
             get
@@ -81,6 +80,11 @@ namespace Components
                 result.SetTRS(position, rotation, scale);
                 return result;
             }
+        }
+
+        private void UpdateMatrixOnValueChange()
+        {
+            innerData.matrix.SetTRS(position, rotation, scale);
         }
 
         public void LookAt(Vector3 point)
@@ -95,6 +99,11 @@ namespace Components
                 return;
             rotation = Quaternion.LookRotation(relativePos, up);
             // Debug.Log("VirtualTransform.LookAt(): Looking at " + Format.Vector(point, 2));
+        }
+
+        public Vector3 TransformDirection(Vector3 direction)
+        {
+            return rotation * direction;
         }
 
         public void DrawGizmos()

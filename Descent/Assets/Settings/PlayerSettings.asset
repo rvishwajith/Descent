@@ -9,23 +9,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: cffc2078819b944c196e32a9b21cda95, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSettings
-  acceleration: 0.2
-  deceleration: -0.7
-  speedMax: 8
+  swimSpeed: 8
+  idleToSwimAcceleration: 0.2
+  swimToIdleAcceleration: -0.7
+  swimToBoostSpeedThreshold: 0.98
+  boostSpeed: 10
+  boostDuration: 3
+  swimToBoostAcceleration: 1
+  boostToSwimAcceleration: -0.7
   diveMin: -85
   diveMax: 85
-  turnMultiplier: 75
-  diveMultiplier: 50
-  checkForTouchMovement: 0
-  checkForKeyboardMovement: 0
-  moveKey: 304
+  steerTurnMultiplier: 75
+  steerDiveMultiplier: 50
+  movementInputOptions: 0
+  steeringInputOptions: 0
+  steerKeyboardMultiplier: 2
+  steerGyroscopeMultiplier: 1
+  steerMouseMultiplier: 1
+  swimKey: 304
   boostKey: 98
-  checkForGyroSteering: 0
-  gyroSteeringSensitivity: 1
-  checkForKeyboardSteering: 0
-  keyboardSteeringSensitivity: 2
-  checkForMouseSteering: 1
-  mouseSteeringSensitivity: 1
+  steerLeftKey: 97
+  steerRightKey: 100
+  steerUpKey: 119
+  steerDownKey: 115

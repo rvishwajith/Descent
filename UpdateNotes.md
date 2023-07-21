@@ -1,5 +1,68 @@
-# Update Notes
-The version history is listed below (latest-first).
+# Milestone Version 0.6 | July 20, 2023
+![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-6-0-observing-mako.png)
+**Procedurally animated Mako Shark viewed using the new camera controller and a basic observation mode UI.**
+![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-6-0-character-model.png)
+**Model for the character prototype with a rig and basic animations (Blender).**
+- Completely overhauled the camera controller:
+  - Can track appropriately marked species (using ObservableSpecies, described below)
+  - Cacheable settings are now stored in a ScriptableObject (CameraSettings).
+  - Input now works properly with cross-platform gestures and can have sensitivity adjusted using the ScriptableObject:
+    - Mobile gestures: 1 finger touch + drag to pivot, 2 finger pinch in/out to zoom.
+    - Desktop gestures: Mouse X/Y to orbit, scroll in/out to zoom.
+  - Orbit transform is now instantiated on Start() and camera is automatically re-parented.
+  - Fixed the tracking state management system, now uses enums.
+  - DOTween is now used for transitioning between targets.
+- Observation mode is now implemented (built into the new Camera Controller):
+  - Any transform set as the target is identified and transitioned to if necessary using DOTween
+  - Targets with the "ObservableSpecies" component can be switched between randomly:
+    - This component also contains all of the information about the species (using a new SpeciesInfo ScriptableObject)
+- Created a new character model for prototyping:
+  - Works with the Animation Controller/Animation blend trees:
+    - Currently only has basic forward swimming and idle animations.
+    - Adjustable animation playback now works.
+- Added the "Find" class for retrieving and caching components:
+  - Currently retrieves the camera controller and the observation UI controller.
+- Created new custom components:
+  - FollowTarget follows a target using DOTween and limited rotation.
+  - Path/FollowPath now works as expected (?), using DOTween.
+  - MoveSegments has child bones follow the movement of a parent bone similar to the old snake-like movement system, but without the need for a position history.
+    - Note: Currently requires rebuilding the heirarchy initially due to issues with parent transformations affecting children. Currently doesn't cause any issues, but may lead to issues later.
+- Started working on the new player controller:
+  - Cross-platform input support (keyboard, mouse, touch, gyroscope)
+  - Uses ScriptableObjects for settings
+- Procedural animation for large rigged creatures now works:
+  - Uses the built-in SkinnedMeshRenderer (using the MoveSegments/FollowTarget components).
+  - Colliders pivot correctly with the armature bones.
+  - Tested using the (replaced and rigged) Shortfin Mako Shark mesh, seems to work perfectly:
+    - Note: Depending on the rotation of the root bone (due to Blender export), may require a parent constraint to be set on a seperate follower object.
+    - Visual glitch where teeth pop out when the head bone is rotated, this is due to an error in the bone weights for the model which will be fixed later, not Unity.
+- Added new version of instanced ambient particles.
+- Overhauled the entire UI system, which is now using the UI Toolkit package:
+  - Removed TextMeshPro package (UI toolkit does not depend on it).
+  - Added a basic UI setup for observation mode:
+    - Can fade in/out and be disabled.
+    - Will update information when the target of the Camera is to a new species.
+  - All UI assets are now kept in the appropriate folder (under "Styles", "Pages", etc.).
+- Project build version changed to 0.6.0.
+- Major internal project cleanup/reorganization:
+  - All prefabs will now be placed under an "Instances" folder.
+  - Materials, models, instances, etc. have now been moved out of resources into their own folders.
+  - Removed lots of old models/scripts and rebuilt the project.
+  - Controllers for the camera/player are now under the component namespace. 
+  - Test scenes are now put into the proper location ("Scenes") and most archived scenes were deleted.
+  - Some old scripts/prefabs that may still be necessary were put in the archive folder.
+  - Namespaces for most components/utilities classes are fixed.
+  - Most custom gizmos now use enums.
+  - Shader Graph subgraphs and HLSL functions are now in their own folder.
+  - Scriptable objects are now used in most places.
+  - Shader graph custom nodes are now properly categorized.
+  - Camera and Player are now subspaces of Components namespace.
+- Updated Mac test build version to 0.6.
+- Implemented a new water shader using summed Gerstner waves:
+  - Custom nodes created for Gerstner waves and summed wave calculations (offset, displaced position, normals, etc)
+  - Works using world position and is y-independent
+- Updated README/Thumbnails.
+- A demo for observation mode is now working.
 
 ## Version 0.5.2 | July 12, 2023
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-5-2-virtual-transform.png)
@@ -10,7 +73,7 @@ The version history is listed below (latest-first).
   - LookAt(point) works properly with/without world up.
   - Note: LookAt(Transform) is not implemented and will only be added if necessary.
   - World Matrix seems to match the Transform.localToWorldMatrix() exactly.
-  - If necessary, a new transformation matrix will not be generated on every Get and will instead be updated only if rotation/position/scale values are changed.
+    - If necessary, a new transformation matrix will not be generated on every Get and will instead be updated only if rotation/position/scale values are changed.
 - Some testing scenes and custom component scripts were moved or renamed.
 - Boids are now working with virtual transforms:
   - Not noticing a signficant performance gain
@@ -58,9 +121,10 @@ The version history is listed below (latest-first).
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-5-0-boids.png)
 **The new flocking system running with collision avoidance in realtime.**
 - Created a completely new rig system for the player that works properly:
-  - Proper rig layering and corrected scaling/parenting on all of the bones
-  - Hands and legs now have IK targets
-  - Added a custom Gizmo to draw rig heirarchies with labels
+  - Proper rig layering and corrected scaling/parenting on all of the bones.
+  - Hands and legs now have IK targets.
+  - Added a custom Gizmo to draw rig heirarchies with labels.
+- Updated Mac test build to 0.5.
 - Created a new player controller
   - Functionality is the same as cleaner version of UniversalPlayerController
   - Player scripts are now in the Player namespace
@@ -72,13 +136,13 @@ The version history is listed below (latest-first).
   - Now uses a compute shader to greatly improve calculation times.
   - Now is a set of 2 components (Spawner & Manager) which takes in a settings asset for instead of using preset values.
   - Spawner/Manager components may be combined eventually and boid class may be removed when GPU mesh instancing is used.
-  - All rules now work correctly with any weights.
-  - Predator avoidance now works, but is not layer/distance dependent unlike before (will be fixed).
-  - Collision perception distance, neighbor avoidance distance, etc. are now adjustable.
-  - Collision detection now works with any LayerMask object.
-  - Staying inside bounds/raycast avoidance now works.
-  - Perception now has an angular FOV instead of being purely distance based.
-  - Note: May switch from compute shader to jobs system later, or reduce the thread count.
+  - All rules now work correctly with any weights:
+    - Predator avoidance now works, but is not layer/distance dependent unlike before (will be fixed).
+    - Collision perception distance, neighbor avoidance distance, etc. are now adjustable.
+    - Collision detection now works with any LayerMask object.
+    - Staying inside bounds/raycast avoidance now works.
+    - Perception now has an angular FOV instead of being purely distance based.
+    - Note: May switch from compute shader to jobs system later, or reduce the thread count.
 - Added scripts for drawing custom Gizmos (pyramid, boid, bone)
 - Major project cleanup/organization:
   - Removed all of the old player, camera, and boids scripts
@@ -109,10 +173,9 @@ The version history is listed below (latest-first).
   - Now uses entities and colliders/spherecasts instead of instantiated transforms for future parallel job system migration.
   - Supports (static) kelp stalks with variable dynamic kelp leaves that point in any direction.
   - Kelp leaf deformation testing using a single spline now works.
-  - Leaf entities work properly with sphere collision checks even with low integration count and have adjustable deceleration
+    - Leaf entities work properly with sphere collision checks even with low integration count and have adjustable deceleration
 - Minor updates to the player controller.
 - More progress on fast boids:
-- Updated Mac test build to 0.5.
   - Started moving towards a system using entities instead of insantiation for future parallel job system migration
   - Currently still uses instantiation, but will be replaced with DrawMeshInstanced() in the future with a fish deformation material (using a property block for speed/acceleration animation) for much better performance.
 - General project cleanup/organization:

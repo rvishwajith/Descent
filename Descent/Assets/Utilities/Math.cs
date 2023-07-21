@@ -55,19 +55,19 @@ namespace Utilities
         {
             public static int Wrap(int index, int length)
             {
-                return index % length;
+                return Utilities.Arrays.Wrap(index, length);
             }
 
             public static int Wrap(int index, Array a)
             {
-                return index % a.Length;
+                return Utilities.Arrays.WrapIndex(index, a);
             }
         }
 
         // Artifact
         public static int Wrap(int index, int length)
         {
-            return Arrays.Wrap(index, length);
+            return Utilities.Arrays.Wrap(index, length);
         }
     }
 }

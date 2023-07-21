@@ -46,11 +46,14 @@ namespace Utilities
 
         public static void Arrow(Vector3 pos, Vector3 dir, float headLength = 0.1f, float headAngle = 45f)
         {
-            Gizmos.DrawRay(pos, dir);
-            Vector3 right = Quaternion.LookRotation(dir) * Quaternion.Euler(0, 180 + headAngle, 0) * new Vector3(0, 0, 1);
-            Vector3 left = Quaternion.LookRotation(dir) * Quaternion.Euler(0, 180 - headAngle, 0) * new Vector3(0, 0, 1);
-            Gizmos.DrawRay(pos + dir, right * headLength);
-            Gizmos.DrawRay(pos + dir, left * headLength);
+            if (dir.magnitude > 0)
+            {
+                Gizmos.DrawRay(pos, dir);
+                Vector3 right = Quaternion.LookRotation(dir) * Quaternion.Euler(0, 180 + headAngle, 0) * new Vector3(0, 0, 1);
+                Vector3 left = Quaternion.LookRotation(dir) * Quaternion.Euler(0, 180 - headAngle, 0) * new Vector3(0, 0, 1);
+                Gizmos.DrawRay(pos + dir, right * headLength);
+                Gizmos.DrawRay(pos + dir, left * headLength);
+            }
         }
     }
 }

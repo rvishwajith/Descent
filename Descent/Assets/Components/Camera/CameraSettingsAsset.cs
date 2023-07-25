@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Components.Camera
 {
@@ -15,15 +16,22 @@ namespace Components.Camera
         public Vector2 orbitSensitivity = Vector2.one;
         public float defaultOrbitDistance = 3f;
 
-        [Header("Observation Mode")]
+        public ObservationMode observation;
+
+        [Header("Input Settings")]
         public SwitchTargetInputOptions switchTargetInputMode;
         public KeyCode observationPreviousTargetKey = KeyCode.LeftArrow;
         public KeyCode observationNextTargetKey = KeyCode.RightArrow;
+    }
 
-        [Header("Transitions")]
+    [Serializable]
+    public class ObservationMode
+    {
+        [Header("Observation Mode")]
+        [Range(0.05f, 5f)] public float smoothingFactor;
+        [Range(0.05f, 5f)] public float transitionTime = 2.5f;
+        [Range(0.05f, 20f)] public float transitionSpeed = 8f;
         public TransitionOptions transitionOptions;
-        public float transitionDuration = 2.5f;
-        public float transitionSpeed = 8f;
     }
 
     public enum CameraOrbitInputOptions

@@ -125,9 +125,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   maxSpeed: 5.5
-  distanceThreshold: 0.5
-  rotationOptions: 0
-  maxRotationSpeed: 720
+  limitRotation: 1
+  maxRotationSpeed: 300
   debugOptions: 1
 --- !u!1 &1517833545390242161
 GameObject:
@@ -615,7 +614,7 @@ SkinnedMeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
-  m_Quality: 0
+  m_Quality: 4
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: -6769158200889028380, guid: a76abeed1b94e4947b4f73c848b63afe, type: 3}

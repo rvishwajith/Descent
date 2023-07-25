@@ -13,83 +13,37 @@ namespace Components.Movement
     {
         public Transform target;
 
-        [Header("Movement Settings")]
+        [Header("Speed & Rotation Settings")]
         public float maxSpeed = 5;
-        public float distanceThreshold = 0.5f;
-
-        [Header("Rotation Settings")]
-        public RotationOptions rotationOptions = RotationOptions.Unlimited;
-        public float maxRotationSpeed = 720;
+        public bool limitRotation = true;
+        public float maxRotationRate = 60;
 
         [Header("Gizmo Options")]
-        [SerializeField] public DebugOptions debugOptions = DebugOptions.Selected;
+        public DebugOptions debugOptions = DebugOptions.Selected;
 
-        private Vector3 position
-        {
-            get { return transform.position; }
-            set { transform.position = value; }
-        }
-        private Quaternion rotation
-        {
-            get { return transform.rotation; }
-            set { transform.rotation = value; }
-        }
+        private float rotationSpeed { get { return limitRotation ? maxRotationRate : 10000; } }
 
-        private void Start()
-        {
-            Vector3 GenerateRandomPoint(float radius = 100)
-            {
-                return transform.position + Random.insideUnitSphere * radius;
-            }
-
-            var tween = transform.DOMove(transform.position + transform.forward, duration: maxSpeed)
-                .SetSpeedBased(true)
-                .SetLoops(-1);
-            tween.OnUpdate(() =>
-            {
-                var targetPosition = target != null ? target.position : GenerateRandomPoint();
-                tween.ChangeEndValue(targetPosition, true);
-                UpdateRotation(targetPosition);
-            });
-            /*
-            tween.OnStepComplete(() =>
-            {
-                targetPosition = target != null ? target.position : GenerateRandomPoint();
-                Debug.Log("Movement.FollowTarget.TweenOnComplete(): Completed loop #: " + tween.CompletedLoops());
-            });
-            */
-        }
-
-        /*
         private void Update()
         {
-            if (target == null) return;
-
-            var offset = target.position - position;
-            bool needsUpdate = offset.magnitude >= minimumTargetDistance;
-            if (needsUpdate)
+            if (target == null)
             {
-                UpdateRotation(target.position);
-                UpdateMovement();
+                transform.position += transform.forward * (maxSpeed / 2) * Time.deltaTime;
+                return;
             }
-        }
-        */
 
-        private void UpdateRotation(Vector3 targetPosition)
-        {
-            var targetDirection = targetPosition - position;
-            var desiredRotation = Quaternion.LookRotation(targetDirection.normalized, Vector3.up);
+            var distance = Vector3.Distance(target.position, transform.position);
+            if (distance <= 0.1f)
+            {
+                transform.position += transform.forward * (maxSpeed / 2) * Time.deltaTime;
+                return;
+            }
 
-            if (rotationOptions == RotationOptions.Unlimited)
-                transform.LookAt(target.position, Vector3.up);
-            else
-                rotation = Quaternion.RotateTowards(rotation, desiredRotation, maxRotationSpeed * Time.deltaTime);
-        }
+            Quaternion initialRotation = transform.rotation;
+            transform.LookAt(target.position, Vector3.up);
+            Quaternion desiredRotation = transform.rotation;
 
-        private void UpdateMovement()
-        {
-            float targetDist = (target.position - position).magnitude;
-            position += transform.forward * Mathf.Clamp(Time.deltaTime * maxSpeed, 0, targetDist - distanceThreshold);
+            transform.rotation = Quaternion.RotateTowards(initialRotation, desiredRotation, rotationSpeed * Time.deltaTime);
+            transform.position += transform.forward * Mathf.Min(maxSpeed * Time.deltaTime, distance);
         }
 
         private void OnDrawGizmos()
@@ -107,8 +61,8 @@ namespace Components.Movement
         private void DrawGizmos()
         {
             Gizmos.color = Color.cyan;
-            Gizmos.DrawSphere(position, 0.05f);
-            Gizmos.DrawRay(position, transform.forward);
+            Gizmos.DrawSphere(transform.position, 0.05f);
+            Gizmos.DrawRay(transform.position, transform.forward);
         }
     }
 

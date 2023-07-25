@@ -11,7 +11,7 @@ namespace Components
         public DebugOptions gizmoMode = DebugOptions.Selected;
         public DebugOptions labelMode = DebugOptions.Selected;
 
-        public Vector3[] WorldPositions(int startIndex = 0, bool looped = false)
+        public Vector3[] WorldPoints(int startIndex = 0, bool looped = false)
         {
             var worldPoints = new Vector3[looped ? points.Length + 1 : points.Length];
             for (var i = 0; i < points.Length; i++)
@@ -21,7 +21,7 @@ namespace Components
                 worldPoints[i] = worldPoint;
             }
             if (looped)
-                worldPoints[worldPoints.Length - 1] = worldPoints[0];
+                worldPoints[^1] = points[Arrays.WrapIndex(startIndex, points)];
             return worldPoints;
         }
 
@@ -46,7 +46,7 @@ namespace Components
             if (points == null) return;
 
             Gizmos.color = Color.cyan;
-            var worldPoints = WorldPositions();
+            var worldPoints = WorldPoints();
 
             for (var i = 0; i < worldPoints.Length; i++)
             {
@@ -61,7 +61,7 @@ namespace Components
 
             Labels.color = Color.cyan;
             var offset = Vector3.up / 2;
-            var worldPoints = WorldPositions();
+            var worldPoints = WorldPoints();
 
             for (var i = 0; i < worldPoints.Length; i++)
             {

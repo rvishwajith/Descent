@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12612d627d1a24e5b8a2ceab2f5ad14d, type: 3}
+  m_Name: HumpbackWhaleData
+  m_EditorClassIdentifier: 
+  englishName: Humpback Whale
+  latinName: Megaptera Novaeangliae
+  conservationIndex: 2
+  facts:
+  - description: Whatever generic information needs to go here about <HumbackWhale(ObservableSpecies)>
+      will be displayed here.
+  - description: "Adult humpback whales range in length from 14\u201317 meters and
+      can weigh up to 44 tons."
+  orbitOffset: {x: 0, y: 0, z: -5}
+  defaultCameraZoom: 15

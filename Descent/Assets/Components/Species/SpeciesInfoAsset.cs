@@ -5,16 +5,16 @@ namespace Components.Species
     [CreateAssetMenu]
     public class SpeciesInfo : ScriptableObject
     {
-        [Header("Species Profile")]
-        public string englishName = "English Name";
-        public string latinName = "Latin Name";
-        public ConservationIndex conservationIndex = ConservationIndex.Unknown;
+        [Header("Basic Profile")]
+        [SerializeField] public string englishName = "Species English Name Here";
+        [SerializeField] public string latinName = "Species Latin Name Here";
+        [SerializeField] public ConservationIndex conservationIndex = ConservationIndex.Unknown;
 
         [Header("Fact Sheet")]
-        public FactData[] facts;
+        [SerializeField] public FactData[] facts;
 
         [Header("Observation Settings")]
-        public Vector3 orbitOffset;
-        public float defaultOrbitDistance = 2.5f;
+        [SerializeField] public Vector3 orbitOffset = Vector3.zero;
+        [SerializeField] public float defaultCameraZoom = 2.5f;
     }
 }

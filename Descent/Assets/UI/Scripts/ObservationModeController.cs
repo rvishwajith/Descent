@@ -59,7 +59,7 @@ namespace UserInterface
 
         private void EnterObservation(ClickEvent e)
         {
-            float transitionTime = 0.5f;
+            float transitionTime = 0.4f;
             DOVirtual.Float(0, 1, transitionTime, opacity =>
             {
                 observationModePanel.style.opacity = opacity;

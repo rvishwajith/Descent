@@ -25,6 +25,8 @@ namespace Species
             public ComputeShader computeShader;
             public int computeThreadGroupSize = 1024;
 
+            public int frameSplitFactor = 1;
+
             private void Start()
             {
                 // Debug.Log("Current refresh rate: " + Screen.currentResolution.refreshRateRatio + "\nRendering mode: " + SystemInfo.renderingThreadingMode);
@@ -79,12 +81,14 @@ namespace Species
                     boids[i].numPerceivedFlockmates = bufferData[i].numFlockmates;
                     boids[i].UpdateForces();
 
-                    if (i % 2 == frameCount % 2)
+                    if (i % frameSplitFactor == frameCount % frameSplitFactor)
                         boids[i].UpdateCollisionAvoidance();
                 }
-
                 foreach (var boid in boids)
+                {
                     boid.Move(Time.deltaTime);
+                }
+                buffer.Release();
                 Render();
                 frameCount++;
             }

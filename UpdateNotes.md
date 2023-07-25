@@ -1,4 +1,50 @@
-# Milestone Version 0.6 | July 20, 2023
+## Version 0.6.2
+### In Progress
+Actual:
+- Made some test changes to the environemnt and realtime lighting to be cooler and skybox-independent.
+- Updated the Mako shark rig (as a seperate prefab)
+  - The tooth disconnecting glitch is fixed, but the weights still have some issues around the neck.
+  - Blendshapes for opening/closing lower jaw were successful.
+Planned:
+- Updated the new player controller:
+  - Now has a rigidbody (with no forces) for easier collision management.
+    - Triggers will be used later to detect ocean surface/nearby animals/current forces.
+- Progress on the water system:
+  - Started updating the fog post processing shader:
+    - Planning to bake an animation curve into a texture to sample for the depth/opacity falloff curve.
+
+## Version 0.6.1
+### July 25, 2023
+![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-6-1-observing-humpback.png)
+- Camera controller now aligns to the followed object properly when observing animals.
+- Added the humpback whale as new creature:
+  - Has working rig segment animation and target following (using the same component as the mako shark).
+  - Weight painting is mostly fixed for second spine bone.
+  - Observation mode works.
+  - No blendshape animations added (will not be added for a while).
+- Blender export issues for bone rotation are now fixed (tested on the humpback whale model only):
+  - Using the Unity for FBX add-on and changing forward axis to -Z (and no leaf bone export).
+  - Planning to apply fixed bones to the mako shark model with weight painting fixes for the teeth.
+- Large animal movement is now much more lifelike:
+  - Added a component to pivot around its parent in an arc with an adjustable speed/sweep angle.
+- Added the convert class to utilities:
+  - Currently only has methods for converting angles.
+  - Will eventually have methods for converting Quaternions while keeping an offset (like LookAt()).
+- Fixed some glitches:
+  - Fixed glitch where tweening along a path in a loop would not reset to the initial position properly.
+  - Fixed limiting rotation for the FollowTarget component to prevent overly tight turns for procedurally animated creatures.
+- Progress on the new water system:
+  - Added a shader with sine-based vertex deformation:
+    - Although gerstner waves were initially used and look slightly better, the performance cost is much higher for them and calculating the height of the water for points on the frustum's near plane (for applying fog) is much faster.
+    - Added some noise to make the movement seem more random and natural.
+    - Doesn't seem properly (will be fixed later)
+- Some more project cleanup:
+  - Subgraphs are now put under the appropriate categories,
+  - Removed a bunch of unnecessary materials and skybox textures.
+  - Some scene/script reorganization (scenes are under different subfolders now).
+
+# Milestone Version 0.6
+### July 20, 2023
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-6-0-observing-mako.png)
 **Procedurally animated Mako Shark viewed using the new camera controller and a basic observation mode UI.**
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-6-0-character-model.png)
@@ -64,7 +110,8 @@
 - Updated README/Thumbnails.
 - A demo for observation mode is now working.
 
-## Version 0.5.2 | July 12, 2023
+## Version 0.5.2
+### July 12, 2023
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-5-2-virtual-transform.png)
 **Virtual transform testing.**
 - VirtualTransform (now in Component namespace) is complete and seems to be working properly:
@@ -85,7 +132,8 @@
   - Does not work with GPU instancing yet!
 - Added the format utility class and "Models" resource folder.
 
-## Version 0.5.1 | July 7, 2023
+## Version 0.5.1
+### July 7, 2023
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-5-1-single-spline-deform.png)
 **Single spline deformation of the mesh with rotation and scaling support.**
 - Boids now use GPU Instancing instead of the SRP batcher for rendering (Graphics.DrawMeshInstanced):
@@ -117,7 +165,8 @@
 - Added placeholder skyboxes from an asset package.
 - Updated README/added thumbnails.
 
-# Milestone Version 0.5 | June 27, 2023
+# Milestone Version 0.5
+### June 27, 2023
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-5-0-boids.png)
 **The new flocking system running with collision avoidance in realtime.**
 - Created a completely new rig system for the player that works properly:
@@ -154,7 +203,8 @@
 - Added thumbnails to About and UpdateNotes.
 - Added some attributions.
 
-## Version 0.4.3 | June 24, 2023
+## Version 0.4.3
+### June 24, 2023
 - Added a new hammerhead shark prototyping mesh with fixed normals and origin at the minimum Z bounds.
 - Started rebuilding the spline procedural animation for large creatures:
   - Added a test program (DeformOnSpline/MeshDeformer) for deformation of a mesh using a single spline.
@@ -164,7 +214,8 @@
 - Some project cleanup/organization:
   - Removed some of the old procedural animation files and moved others into an archive folder under "Testing".
 
-## Version 0.4.2 | June 24, 2023
+## Version 0.4.2
+### June 24, 2023
 - Made some changes to the fog and caustics system:
   - Fixed a glitch where the caustics faloff would not work properly.
   - Some testing of the world position approximation for both the underside and surface of the waves.
@@ -183,7 +234,8 @@
   - Started using namespaces in scripts.
 - Added the main repostitory thumbnail.
 
-## Version 0.4.1 | June 14, 2023
+## Version 0.4.1
+### June 14, 2023
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-4-1-godrays.png)
 **Faking lightrays using simple particles.**
 - Added the "Identity" class:
@@ -207,7 +259,8 @@
 - Some more project reorganization (removed a few old scenes).
 - Updated README/added thumbnails.
 
-# Milestone Version 0.4 | June 13, 2023
+# Milestone Version 0.4
+### June 13, 2023
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-4-0-fog2.png)
 **The new fog system.**
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-4-0-verlet-kelp2.png)
@@ -271,7 +324,8 @@
   - Can have a time delay.
   - Can move to a changing target position.
 
-## Version 0.3.1 | June 2, 2023
+## Version 0.3.1
+### June 2, 2023
 - Built an animation/tweening system:
   - Has property, delay, duration, interpolation type (incomplete)
   - Can animate position, local position, euler angles, local euler angles.
@@ -285,7 +339,8 @@
 - Added a basic starting menu scene.
 - General cleanup/renaming + removed old player controller class (PlayerController2 -> PlayerController).
 
-# Milestone Version 0.3 | June 1, 2023
+# Milestone Version 0.3
+### June 1, 2023
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/spline-animation-demo.png)
 **Procedural deformation system using linked catmull-rom splines.**
 - Changed Unity version from 2022.2.9 to 2022.3.0 and rebuilt library folder + removed packages.
@@ -319,15 +374,16 @@
   - No flocking behaviour yet.
 - Started overhauling the player controller (PlayerController2 class): 
   - Rotation glitches are now fixed.
+    - Idle state rotation is in-progress.
   - Speed is now based on acceleration with proper state-logging.
   - Boosting now works.
-  - Idle state rotation is in-progress.
   - Animation controller works with new player controller.
   - Supports both keyboard and mouse (bo touch yet).
 - Started overhauling the camera/UI controls.
   - Now panels will only show up in the proper context (ex. only observe if an observable creature is on the screen and nearby).
 
-## Version 0.2.4 | May 31, 2023
+## Version 0.2.4
+### May 31, 2023
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-2-4.png)
 **A prototype of the animation system for using a manta ray.**
 - Panels and buttons can now be added to the UI manager and can be toggled as well.
@@ -340,20 +396,23 @@
 - Removed old manta ray prototyping.
 - Added a screenshake function to the camera (called when gates are opening).
 
-## Version 0.2.3 | May 30, 2023
+## Version 0.2.3
+### May 30, 2023
 - Made UI manager on Camera globally accesible and initialized at start.
 - Added the ability to hide/show labels.
 - Added a pause button (doesn't do anything currently).
 - Added an interact button to the UI (will be renamed) to toggle when entering/leaving a trigger zone to open the door.
 - Some renaming/reorganization + changed README description.
 
-## Version 0.2.2 | May 30, 2023
+## Version 0.2.2
+### May 30, 2023
 - Camera controller now has access to UI manager:
   - Set the label on text for species' english and latin names.
 - Sound and camera files moved to their own folders.
 - Added a thumbnails folder + thumbnail to README.
 
-## Version 0.2.1 | May 30, 2023
+## Version 0.2.1
+### May 30, 2023
 - Temporarily removed the deadzones from the player controller input.
 - Added a custom path system that uses spline paths:
   - Allows a designated target to move on the path.
@@ -368,7 +427,8 @@
 - Updated manta ray procedural animation:
   - Vertices now pivot around the center point based on a gradient and an angle.
 
-# Milestone Version 0.2 | May 30, 2023
+# Milestone Version 0.2
+### May 30, 2023
 - Added (N^2) boids behaviour:
   - Center of mass
   - Match velocity
@@ -402,7 +462,8 @@
 - Added y-depth based fog color changing to global fullscreen shader.
 - Added ambient particle VFX.
 
-## Version 0.1.6 | May 23, 2023
+## Version 0.1.6
+### May 23, 2023
 - Spline interpolation for procedural mesh animation now works properly (using 1 catmull rom spline)
   - Scaling spline down to initial mesh length still incomplete.
 - Added universal static Interpolate for all custom lerps (from 0 to 1):
@@ -414,14 +475,16 @@
     - Cubic
 - Added TextMeshPro package.
 
-## Version 0.1.5 | May 23, 2023
+## Version 0.1.5
+### May 23, 2023
 - Added performance metrics calculator (currently only FPS):
   - Displays average FPS on a label (supports min/max samples and rounding).
 - Added Attributions.md page.
 - Minor reorganization / renaming.
 - More work on spline interpolation for procedural mesh animation.
 
-## Version 0.1.4 | May 23, 2023
+## Version 0.1.4
+### May 23, 2023
 - Successful (partial) underwater fog render pass:
   - Fog opacity using cubic function now calculated/applied properly.
   - Fog still does not have a seperate value for falloff distance (uses camera zFar).
@@ -430,13 +493,15 @@
 - (Not working) Added placeholder mesh for procedural mesh animation using a spline.
 - Added placeholder UI for interacting with a checkpoint.
 
-## Version 0.1.3 | May 23, 2023
+## Version 0.1.3
+### May 23, 2023
 - Started working on fullscreen render pass shader for underwater fog. In-progress:
   - Fog opacity using a custom cubic function with linear (0-1) z-depth.
 - Minor renaming/reorganization to files/assets.
 - Minor changes to test level.
 
-## Version 0.1.2 | May 22, 2023
+## Version 0.1.2
+### May 22, 2023
 - Created a basic “example level” testing scene (replacing sample scene)
 - Added a basic environment with materials for floor, walls, etc.
 - Added a door which can animate sliding open.
@@ -447,10 +512,13 @@
 - Added player placeholder.
 - Updated volume profile.
 
-## Version 0.1.1 | May 19, 2023
+## Version 0.1.1
+### May 19, 2023
 - Set up sample scene.
 - Added a shader to cover all points below a gradient:
   - Will be used for a future water line at the water surface.
 
-# Version 0.1 (Project Creation) | May 18, 2023
+# Project Creation (Version 0.1)
+### May 18, 2023
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/thumbnail.png)
+- Created the repository and Unity project.

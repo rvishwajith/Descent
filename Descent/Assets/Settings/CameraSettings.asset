@@ -18,9 +18,11 @@ MonoBehaviour:
   orbitInputMode: 0
   orbitSensitivity: {x: 1, y: 1}
   defaultOrbitDistance: 3
+  observation:
+    smoothingFactor: 0.74
+    transitionTime: 2.5
+    transitionSpeed: 8
+    transitionOptions: 0
   switchTargetInputMode: 0
   observationPreviousTargetKey: 276
   observationNextTargetKey: 275
-  transitionOptions: 0
-  transitionDuration: 2
-  transitionSpeed: 8

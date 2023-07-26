@@ -77,7 +77,7 @@ namespace Components
         public void DrawLabels()
         {
             if (target != null)
-                Labels.World(targetState + "", transform.position + Vector3.up / 3);
+                Labels.AtWorld(targetState + "", transform.position + Vector3.up / 3);
         }
     }
 

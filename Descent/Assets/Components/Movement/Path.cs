@@ -65,7 +65,7 @@ namespace Components
 
             for (var i = 0; i < worldPoints.Length; i++)
             {
-                Labels.World("Point " + i, worldPoints[i] + offset);
+                Labels.AtWorld("Point " + i, worldPoints[i] + offset);
             }
         }
     }

@@ -46,7 +46,7 @@ namespace Components.CustomGizmos
             var name = parent.name.Replace(bonePrefix, "").Trim();
             if (parent == root)
                 name += " (Root)";
-            Labels.World(name, parent.position);
+            Labels.AtWorld(name, parent.position);
             // Handles.Label(parent.position, name);
         }
 

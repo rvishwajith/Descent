@@ -1,24 +1,38 @@
 using UnityEngine;
-using UnityEditor;
 
 namespace Utilities
 {
     public static class Labels
     {
+
         public static Color color
         {
-            set { Handles.color = value; }
-            get { return Handles.color; }
+            set
+            {
+#if UNITY_EDITOR
+                UnityEditor.Handles.color = value;
+#endif
+            }
+            get
+            {
+#if UNITY_EDITOR
+                return UnityEditor.Handles.color;
+#else
+                return Color.black;
+#endif
+            }
         }
 
-        public static void Screen(string text, Vector2 position)
+        public static void OnScreen(string text, Vector2 position)
         {
-            World(text, Camera.main.ViewportToWorldPoint(position));
+            AtWorld(text, Camera.main.ViewportToWorldPoint(position));
         }
 
-        public static void World(string text, Vector3 position)
+        public static void AtWorld(string text, Vector3 position)
         {
+#if UNITY_EDITOR
             UnityEditor.Handles.Label(position, text);
+#endif
         }
     }
 }

@@ -1,17 +1,38 @@
-## Version 0.6.2
+## Version 0.6.3
 ### In Progress
 Actual:
-- Made some test changes to the environemnt and realtime lighting to be cooler and skybox-independent.
-- Updated the Mako shark rig (as a seperate prefab)
-  - The tooth disconnecting glitch is fixed, but the weights still have some issues around the neck.
-  - Blendshapes for opening/closing lower jaw were successful.
 Planned:
-- Updated the new player controller:
+- Updated the player controller:
   - Now has a rigidbody (with no forces) for easier collision management.
     - Triggers will be used later to detect ocean surface/nearby animals/current forces.
+  - Animations now use a manual state machine.
 - Progress on the water system:
-  - Started updating the fog post processing shader:
-    - Planning to bake an animation curve into a texture to sample for the depth/opacity falloff curve.
+  - Water shader now uses a subgraph for computing vertex position:
+    - This will be reused to compute the near plane vertex displacements on the post-process underwater shader.
+- Started updating the post-process underwater fog shader:
+  - Planning to bake tge animation curve from the water settings SO into a texture:
+    - Dample for the depth/opacity falloff curve.
+    - May be used to sample for the depth color gradient as well.
+
+## Version 0.6.2
+### July 25, 2023
+- Made some test changes to the environment and realtime lighting to be cooler and skybox-independent (may be re-added later, was causing lighting issues).
+- Updated the Mako shark rig (as a seperate prefab):
+  - Blendshapes for opening/closing lower jaw are imported properly from Blender shape keys, even with armature modifier not applied yet.
+  - Tooth disconnecting glitch is fixed, but weights are still improper between the neck and dorsal fin.
+- Created a ScriptableObject for water settings/shared data:
+  - Created components (MatchWaterSurfaceHeight / SunRays) which reference the SO and update data accordingly in the editor:
+    - Currently changed are checked in OnDrawGizmos, might be changed to OnValidate (but marking dirty/applying modified does not call validation check).
+  - Has an animation curve for fog density which will later be baked into a texture when the underwater fog is updated.
+- Started working on the new light rays effect using Shader Graph:
+  - World position (Y)-based culling works (will be updated automatically based on the water settings SO).
+  - Glitch or performance issue (?) causing stuttering for some particles and drops FPS in play mode from ~450 to ~250 (may be seperate issues).
+- Build version changed to 0.6.2 for testing the Observation Mode scene:
+  - Made some changes to Player settings for an experimental build test on iPad/Mac (graphics jobs, default windowing).
+  - Build ran with no issues except armature stuttering.
+- Added editor preprocessor directives to Utilities.Labels (required to compile the app)
+- Added 2 utility subgraphs to split position (XYZ -> XZ + Y) and split vector (XYZ -> X, Y, Z).
+- SO folders renamed to ScriptableSettings and ScriptableData.
 
 ## Version 0.6.1
 ### July 25, 2023
@@ -20,7 +41,7 @@ Planned:
 - Added the humpback whale as new creature:
   - Has working rig segment animation and target following (using the same component as the mako shark).
   - Weight painting is mostly fixed for second spine bone.
-  - Observation mode works.
+  - Observation mode works with SO fact sheet.
   - No blendshape animations added (will not be added for a while).
 - Blender export issues for bone rotation are now fixed (tested on the humpback whale model only):
   - Using the Unity for FBX add-on and changing forward axis to -Z (and no leaf bone export).
@@ -82,7 +103,8 @@ Planned:
   - Tested using the (replaced and rigged) Shortfin Mako Shark mesh, seems to work perfectly:
     - Note: Depending on the rotation of the root bone (due to Blender export), may require a parent constraint to be set on a seperate follower object.
     - Visual glitch where teeth pop out when the head bone is rotated, this is due to an error in the bone weights for the model which will be fixed later, not Unity.
-- Added new version of instanced ambient particles.
+- Added new version of instanced ambient particles:
+  - Currently uses built-in materials only instead of Shader Graph (will eventually add camera distance-based fading).
 - Overhauled the entire UI system, which is now using the UI Toolkit package:
   - Removed TextMeshPro package (UI toolkit does not depend on it).
   - Added a basic UI setup for observation mode:

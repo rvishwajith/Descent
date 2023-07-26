@@ -130,7 +130,7 @@ namespace Components
                     + rotText + "\n"
                     + anglesText + "\n"
                     + scaleText;
-                Labels.World(result, labelPos);
+                Labels.AtWorld(result, labelPos);
             }
 
             Directions(position);

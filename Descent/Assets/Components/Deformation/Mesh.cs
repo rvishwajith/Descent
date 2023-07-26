@@ -79,6 +79,6 @@ public class MeshController
             + "\nLength: " + Format.Float(currentLength, 3) + " (Initial: " + Format.Float(initialLength, 3) + ")";
         Gizmo.color = Color.gray;
         Gizmo.Arrow(origin + offset, -offset);
-        Labels.World(text, origin + offset);
+        Labels.AtWorld(text, origin + offset);
     }
 }

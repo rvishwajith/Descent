@@ -63,7 +63,7 @@ namespace Components.Deformation
             var pos = Position(0.5f);
             var offset = Vector3.up * 0.7f;
             Gizmo.Arrow(pos + offset, -offset);
-            Labels.World("Length: " + Format.Float(length, 2), pos + offset);
+            Labels.AtWorld("Length: " + Format.Float(length, 2), pos + offset);
         }
     }
 }

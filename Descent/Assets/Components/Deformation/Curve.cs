@@ -78,11 +78,11 @@ namespace Components.Deformation
                 offset = Vector3.up * 1f;
 
             Gizmo.color = Color.gray;
-            Labels.World("Total Length: " + Format.Float(length, 3), origin + offset);
+            Labels.AtWorld("Total Length: " + Format.Float(length, 3), origin + offset);
             Gizmo.Arrow(origin + offset, -offset);
 
             offset = Vector3.up * -0.5f;
-            Labels.World("Aggregate Lengths: " + Format.Array(segmentRelAggregates, 3), origin + offset);
+            Labels.AtWorld("Aggregate Lengths: " + Format.Array(segmentRelAggregates, 3), origin + offset);
             Gizmo.Arrow(origin + offset, -offset);
 
             /*

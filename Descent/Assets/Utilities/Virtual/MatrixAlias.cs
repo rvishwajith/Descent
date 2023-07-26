@@ -1,28 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Components;
 using Utilities;
 
-public class VirtualMatrixAlias : MonoBehaviour
+namespace Components.Virtual
 {
-    VirtualTransform virtualTransform = new();
-
-    void UpdateVirtualMatrix()
+    public class VirtualMatrixAlias : MonoBehaviour
     {
-        transform.LookAt(Camera.main.transform.position);
+        VirtualTransform virtualTransform = new();
 
-        virtualTransform.position = transform.position;
-        virtualTransform.eulerAngles = transform.eulerAngles;
-        virtualTransform.scale = transform.lossyScale;
-    }
+        void UpdateVirtualMatrix()
+        {
+            transform.LookAt(UnityEngine.Camera.main.transform.position);
 
-    private void OnDrawGizmos()
-    {
-        UpdateVirtualMatrix();
-        virtualTransform.DrawGizmos();
+            virtualTransform.position = transform.position;
+            virtualTransform.eulerAngles = transform.eulerAngles;
+            virtualTransform.scale = transform.lossyScale;
+        }
 
-        Labels.World(virtualTransform.matrix + "", virtualTransform.position + Vector3.up * 3);
-        Labels.World(transform.localToWorldMatrix + "", transform.position);
+        private void OnDrawGizmos()
+        {
+            UpdateVirtualMatrix();
+            virtualTransform.DrawGizmos();
+
+            Labels.AtWorld(virtualTransform.matrix + "", virtualTransform.position + Vector3.up * 3);
+            Labels.AtWorld(transform.localToWorldMatrix + "", transform.position);
+        }
     }
 }

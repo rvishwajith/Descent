@@ -8,8 +8,8 @@ namespace Components
         public Vector3[] points;
 
         [Header("Settings/Debug Options")]
-        public DebugOptions gizmoMode = DebugOptions.Selected;
-        public DebugOptions labelMode = DebugOptions.Selected;
+        public DebugOptions gizmoMode = DebugOptions.WhenSelected;
+        public DebugOptions labelMode = DebugOptions.WhenSelected;
 
         public Vector3[] WorldPoints(int startIndex = 0, bool looped = false)
         {
@@ -35,9 +35,9 @@ namespace Components
 
         private void OnDrawGizmosSelected()
         {
-            if (gizmoMode == DebugOptions.Selected)
+            if (gizmoMode == DebugOptions.WhenSelected)
                 DrawGizmos();
-            if (labelMode == DebugOptions.Selected)
+            if (labelMode == DebugOptions.WhenSelected)
                 DrawLabels();
         }
 

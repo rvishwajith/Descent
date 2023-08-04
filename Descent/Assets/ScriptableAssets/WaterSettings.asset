@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0996e4a3a251d41799e14b0b45bee353, type: 3}
+  m_Name: WaterSettings
+  m_EditorClassIdentifier: 
+  surfaceHeight: 20
+  lowestDepth: -500
+  depthToColorGradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  underwaterVisibilityCurve:
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: -0.020149231
+        value: -0.0047302246
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.36031562
+        value: 0.19140011
+        inSlope: 1.0062633
+        outSlope: 1.0062633
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.2954482
+      - serializedVersion: 3
+        time: 0.4936447
+        value: 0.52702564
+        inSlope: 2.781253
+        outSlope: 2.781253
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.24055497
+      - serializedVersion: 3
+        time: 0.58684343
+        value: 0.80255103
+        inSlope: 2.1021552
+        outSlope: 2.1021552
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.16940714
+      - serializedVersion: 3
+        time: 0.7714516
+        value: 0.8183568
+        inSlope: -2.0876083
+        outSlope: -2.0876083
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.2919602
+        outWeight: 0.39970452
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    outputTexture: {fileID: 2800000, guid: 26b2b11ad53c44faa97846269616a0a0, type: 3}
+    resolution: {x: 512, y: 1}
+    format: 18
+    clickToBake: 0
+  visiblityNearPlane: 0.3
+  visibilityFarPlane: 500
+  enableFogInSceneView: 0
+  enableFogInGameView: 0

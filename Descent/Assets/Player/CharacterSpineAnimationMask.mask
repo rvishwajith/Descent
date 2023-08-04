@@ -1,0 +1,171 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CharacterSpineAnimationMask
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: RootWaist
+    m_Weight: 0
+  - m_Path: RootWaist/Waist
+    m_Weight: 0
+  - m_Path: RootWaist/Waist/Waist|WaistMesh|Dupli|
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestLower
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestLower/ChestLower|ChestMiddleMesh|Dupli|
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestMiddle
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestMiddle/ChestMiddle|ChestMiddleMesh|Dupli|
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ChestUpper
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ChestUpper/ChestUpper|ChestUpperMesh|Dupli|
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ChestUpper/ChestUpper|ChestUpperRingInstance|Dupli|1
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ChestUpper/ChestUpper|LowerRing|Dupli|0.1
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ChestUpper/ChestUpper|ChestUpperBackRing1|Dupli|2
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ChestUpper/ChestUpper|LowerRing|Dupli|0.2
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ChestUpper/ChestUpper|ChestUpperBackRing2|Dupli|3
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ChestUpper/ChestUpper|LowerRing|Dupli|0.3
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ChestUpper/ChestUpper|ChestUpperBackRing3|Dupli|4
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ChestUpper/ChestUpper|LowerRing|Dupli|0.4
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ArmL
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ArmL/ArmL
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ArmL/ArmL/ArmL|Arm|Dupli|
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ArmL/ForearmL
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ArmL/ForearmL/ForearmL
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ArmL/ForearmL/ForearmL/ForearmL|Forearm|Dupli|
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ArmL/ForearmL/HandL
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ArmL/ForearmL/HandL/HandL
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ArmL/ForearmL/HandL/HandL/HandL|HandMesh|Dupli|
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ArmL/ForearmL/HandL/HandL_end
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/NeckSwivel
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/NeckSwivel/NeckLower
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/NeckSwivel/NeckLower/NeckSegmentLower
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/NeckSwivel/NeckLower/NeckSegmentLower/NeckSegmentLower|NeckSegmentMesh|Dupli|
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/NeckSwivel/NeckLower/NeckMiddle
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/NeckSwivel/NeckLower/NeckMiddle/NeckSegmentMiddle
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/NeckSwivel/NeckLower/NeckMiddle/NeckSegmentMiddle/NeckSegmentMiddle|NeckSegmentMesh|Dupli|
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/NeckSwivel/NeckLower/NeckMiddle/NeckUpper
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/NeckSwivel/NeckLower/NeckMiddle/NeckUpper/NeckSegmentUpper
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/NeckSwivel/NeckLower/NeckMiddle/NeckUpper/NeckSegmentUpper/NeckSegmentUpper|NeckSegmentMesh|Dupli|
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/NeckSwivel/NeckLower/NeckMiddle/NeckUpper/HeadSwivel
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/NeckSwivel/NeckLower/NeckMiddle/NeckUpper/HeadSwivel/HeadInstance
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/NeckSwivel/NeckLower/NeckMiddle/NeckUpper/HeadSwivel/HeadInstance/HeadInstance|Light|Dupli|
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/NeckSwivel/NeckLower/NeckMiddle/NeckUpper/HeadSwivel/HeadInstance/HeadInstance|LightOuterRing|Dupli|1
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/NeckSwivel/NeckLower/NeckMiddle/NeckUpper/HeadSwivel/HeadInstance/HeadInstance|Skull|Dupli|2
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/NeckSwivel/NeckLower/NeckMiddle/NeckUpper/HeadSwivel/HeadInstance/HeadInstance|NeckSocket|Dupli|3
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/NeckSwivel/NeckLower/NeckMiddle/NeckUpper/HeadSwivel/HeadSwivel_end
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ArmR
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ArmR/ArmR
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ArmR/ArmR/ArmR|Arm|Dupli|
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ArmR/ForearmR
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ArmR/ForearmR/ForearmR
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ArmR/ForearmR/ForearmR/ForearmR|Forearm|Dupli|
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ArmR/ForearmR/HandR
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ArmR/ForearmR/HandR/HandR
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ArmR/ForearmR/HandR/HandR/HandR|HandMesh|Dupli|
+    m_Weight: 0
+  - m_Path: RootWaist/ChestLower/ChestMiddle/ChestUpper/ArmR/ForearmR/HandR/HandR_end
+    m_Weight: 0
+  - m_Path: RootWaist/ThighL
+    m_Weight: 0
+  - m_Path: RootWaist/ThighL/LegL
+    m_Weight: 0
+  - m_Path: RootWaist/ThighL/LegL/LegL|Thigh|Dupli|
+    m_Weight: 0
+  - m_Path: RootWaist/ThighL/CalfL
+    m_Weight: 0
+  - m_Path: RootWaist/ThighL/CalfL/CalfL
+    m_Weight: 0
+  - m_Path: RootWaist/ThighL/CalfL/CalfL/CalfL|Calf|Dupli|
+    m_Weight: 0
+  - m_Path: RootWaist/ThighL/CalfL/AnkleL
+    m_Weight: 0
+  - m_Path: RootWaist/ThighL/CalfL/AnkleL/FootL
+    m_Weight: 0
+  - m_Path: RootWaist/ThighL/CalfL/AnkleL/FootL/FootL|Foot|Dupli|
+    m_Weight: 0
+  - m_Path: RootWaist/ThighL/CalfL/AnkleL/FootL/FootL|Flipper|Dupli|1
+    m_Weight: 0
+  - m_Path: RootWaist/ThighL/CalfL/AnkleL/AnkleL_end
+    m_Weight: 0
+  - m_Path: RootWaist/ThighR
+    m_Weight: 0
+  - m_Path: RootWaist/ThighR/LegR
+    m_Weight: 0
+  - m_Path: RootWaist/ThighR/LegR/LegR|Thigh|Dupli|
+    m_Weight: 0
+  - m_Path: RootWaist/ThighR/CalfR
+    m_Weight: 0
+  - m_Path: RootWaist/ThighR/CalfR/CalfR
+    m_Weight: 0
+  - m_Path: RootWaist/ThighR/CalfR/CalfR/CalfR|Calf|Dupli|
+    m_Weight: 0
+  - m_Path: RootWaist/ThighR/CalfR/AnkleR
+    m_Weight: 0
+  - m_Path: RootWaist/ThighR/CalfR/AnkleR/FootR
+    m_Weight: 0
+  - m_Path: RootWaist/ThighR/CalfR/AnkleR/FootR/FootR|Foot|Dupli|
+    m_Weight: 0
+  - m_Path: RootWaist/ThighR/CalfR/AnkleR/FootR/FootR|Flipper|Dupli|1
+    m_Weight: 0
+  - m_Path: RootWaist/ThighR/CalfR/AnkleR/AnkleR_end
+    m_Weight: 0

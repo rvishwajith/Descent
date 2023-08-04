@@ -1,3 +1,4 @@
+/*
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,3 +48,4 @@ public class PivotCamera : MonoBehaviour
         transform.LookAt(target.position + targetOffset);
     }
 }
+*/

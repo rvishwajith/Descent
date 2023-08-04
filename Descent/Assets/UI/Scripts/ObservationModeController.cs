@@ -33,7 +33,7 @@ namespace UserInterface
         private void InitActions()
         {
             var cameraController = Find.CameraController;
-            root.Q<Button>("ExitObservation").RegisterCallback<ClickEvent>(ExitObservation);
+            root.Q<Button>("ExitObservation").RegisterCallback<ClickEvent>(Hide);
             root.Q<Button>("PrevFact").RegisterCallback<ClickEvent>(_ => { SwitchFact(-1); });
             root.Q<Button>("NextFact").RegisterCallback<ClickEvent>(_ => { SwitchFact(1); });
 
@@ -57,7 +57,7 @@ namespace UserInterface
             Debug.Log("UI.ObservationModeController.SwitchFact(): Shift by " + shiftAmt);
         }
 
-        private void EnterObservation(ClickEvent e)
+        public void Show(ClickEvent e = null)
         {
             float transitionTime = 0.4f;
             DOVirtual.Float(0, 1, transitionTime, opacity =>
@@ -70,7 +70,7 @@ namespace UserInterface
             });
         }
 
-        private void ExitObservation(ClickEvent e)
+        public void Hide(ClickEvent e = null)
         {
             float transitionTime = 0.5f;
             DOVirtual.Float(1, 0, transitionTime, opacity =>
@@ -79,7 +79,7 @@ namespace UserInterface
             }).OnComplete(() =>
             {
                 observationModePanel.SetEnabled(false);
-                Debug.Log("UserInterface.Controller.ExitObservation(): Finished exiting.");
+                // Debug.Log("UserInterface.Controller.ExitObservation(): Finished exiting.");
             });
         }
     }

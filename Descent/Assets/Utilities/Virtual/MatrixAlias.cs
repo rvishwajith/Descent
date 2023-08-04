@@ -1,11 +1,12 @@
 using UnityEngine;
-using Utilities;
+
+/* Components -> Virtual -> MatrixAlias */
 
 namespace Components.Virtual
 {
-    public class VirtualMatrixAlias : MonoBehaviour
+    public class MatrixAlias : MonoBehaviour
     {
-        VirtualTransform virtualTransform = new();
+        private VirtualTransform virtualTransform = new();
 
         void UpdateVirtualMatrix()
         {
@@ -21,8 +22,8 @@ namespace Components.Virtual
             UpdateVirtualMatrix();
             virtualTransform.DrawGizmos();
 
-            Labels.AtWorld(virtualTransform.matrix + "", virtualTransform.position + Vector3.up * 3);
-            Labels.AtWorld(transform.localToWorldMatrix + "", transform.position);
+            Utilities.Labels.AtWorld(virtualTransform.matrix + "", virtualTransform.position + Vector3.up * 3);
+            Utilities.Labels.AtWorld(transform.localToWorldMatrix + "", transform.position);
         }
     }
 }

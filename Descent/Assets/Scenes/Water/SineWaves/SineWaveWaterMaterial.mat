@@ -8,9 +8,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SineWaveWaterMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 9b8460e8cc68c4fccb2973198676e294,
+  m_Shader: {fileID: -6465566751694194690, guid: 2edc2ffe227e342349f16a20649ecd87,
     type: 3}
-  m_Parent: {fileID: -876546973899608171, guid: 9b8460e8cc68c4fccb2973198676e294,
+  m_Parent: {fileID: -876546973899608171, guid: 2edc2ffe227e342349f16a20649ecd87,
     type: 3}
   m_ModifiedSerializedProperties: 2
   m_ValidKeywords: []
@@ -30,6 +30,7 @@ Material:
     - _Metallic: 0.3
     - _QueueControl: 0
     - _Smoothness: 0.7
+    - _SurfaceLevel: 20
     m_Colors:
     - _Amplitudes: {r: 0.2, g: 0.1, b: -0.15, a: 0.15}
     - _Direction_A: {r: -3, g: 1, b: 0, a: 0}

@@ -19,7 +19,7 @@ namespace Components.Movement
         public float maxRotationRate = 60;
 
         [Header("Gizmo Options")]
-        public DebugOptions debugOptions = DebugOptions.Selected;
+        public DebugOptions debugOptions = DebugOptions.WhenSelected;
 
         private float rotationSpeed { get { return limitRotation ? maxRotationRate : 10000; } }
 
@@ -54,7 +54,7 @@ namespace Components.Movement
 
         private void OnDrawGizmosSelected()
         {
-            if (debugOptions == DebugOptions.Selected)
+            if (debugOptions == DebugOptions.WhenSelected)
                 DrawGizmos();
         }
 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Assets/Flocking Settings")]
 public class FlockingSettings : ScriptableObject
 {
     // Settings

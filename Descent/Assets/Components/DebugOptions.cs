@@ -3,7 +3,7 @@
     public enum DebugOptions
     {
         Always,
-        Selected,
+        WhenSelected,
         Never
     }
 }

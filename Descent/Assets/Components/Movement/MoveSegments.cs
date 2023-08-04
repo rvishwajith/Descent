@@ -9,8 +9,8 @@ namespace Components
         [SerializeField] private Segment[] segments;
 
         [Header("Debug Options")]
-        public DebugOptions gizmoOptions = DebugOptions.Selected;
-        public DebugOptions labelOptions = DebugOptions.Selected;
+        public DebugOptions gizmoOptions = DebugOptions.WhenSelected;
+        public DebugOptions labelOptions = DebugOptions.WhenSelected;
 
         // [Tooltip("If enabled, the segment detaches itself from its current parent. A new empty object is added to the heirarchy and replaces the previous parent.")]
         private bool detachFromParent = true;
@@ -60,13 +60,13 @@ namespace Components
         {
             if (segments == null) return;
 
-            if (gizmoOptions == DebugOptions.Selected)
+            if (gizmoOptions == DebugOptions.WhenSelected)
             {
                 Gizmos.color = Color.yellow;
                 foreach (var segment in segments)
                     segment.DrawGizmos();
             }
-            if (labelOptions == DebugOptions.Selected)
+            if (labelOptions == DebugOptions.WhenSelected)
             {
                 foreach (var segment in segments)
                     segment.DrawLabels();

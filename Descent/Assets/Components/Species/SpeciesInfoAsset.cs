@@ -2,7 +2,7 @@
 
 namespace Components.Species
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Assets/Species Data")]
     public class SpeciesInfo : ScriptableObject
     {
         [Header("Basic Profile")]

@@ -1,25 +1,65 @@
-## Milestone Version 0.7
-### In Progress
-Planned:
-- Updated the player controller:
+## Version 0.6.4
+### Published on August 4, 2023
+![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-6-4-water-shader-prototype.png)
+**Wave deformation (sine/noise) + underwater detection render pass.**
+![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/v0-6-4-waterline-detection.png)
+**Waterline/meniscus effect prototyping (green is the meniscus area, red is the underwater render pass).**
+- Major changes the water system for underwater effects, which is now based on sine/noise:
+  - New type of displacement: sine + noise + panning normal maps
+    - Gerstner waves look slightly more convincing but are more expensive and height cannot be quickly sampled at a given position (which is needed for the current underwater shader)
+  - Height-based color gradient.
+    - Works but gets modified when the camera far plane is changed because depth from world position is used.
+      - Added the ClampVectorByMagnitude subgraph to address this in the future.
+  - New fullscreen shader for underwater/waterline detection:
+    - Samples the position of the point in the space of the camera near plane, if it is below the calculated water level (using the same wave height function) for that world x/z then it draws fog.
+- Completely overhauled the player controller:
   - Now uses a PlayerSettings SO asset instead of using preset values.
-  - Now uses a rigidbody (with no gravity):
-    - Necessary because triggers will be used later to detect ocean surface/nearby animals/current forces.
-  - Movement speed now uses an animation curve from the SO for acceleration/deceleration.
-  - Animation controller now has proper a state machine setup.
-- Water system improvements:
-  - The underwater post-processing shader now properly lines up to the waves on the near plane.
-- Added a main menu screen (will later be used as the tutorial/intro screen).
-- Recreated the stats/FPS counter using UI Toolkit instead of UGUI:
-  - Still uses Components.PerformanceMetrics internally.
-- Progress on the water system:
-  - Started working on a new post-process underwater fog shader to match the sine waves (world Y position test on the frustum near plane) instead of relying distance/depth entirely:
-  - Planning to bake tge animation curve from the water settings SO into a texture:
-    - Sample for the depth/opacity falloff curve.
-    - May be used to sample for the depth color gradient as well.
-  - Water surface planes are now linked to the water settings SO for automatic positioning.
-  - Water surface shader now uses a subgraph for computing vertex position:
-    - This will it reused to compute the near plane vertex displacements on the post-process underwater shader.
+  - Movement speed now uses an animation curve from the SO and 0 to 1 acceleration instead of direct acceleration.
+    - Easing looks much better.
+  - Flippers are now seperate skinned meshes that use verlet integration, and are children of the player mesh.
+    - Issue with normals/rotation, could be due to export.
+    - May switch to using a parent constraint instead.
+  - Now uses a rigidbody (no forces), because collisions (probably using SphereCast) will be used later to detect:
+      - The ocean surface (for surface/submerge controlers).
+      - Large/observable nearby animals.
+      - Checkpoints and action triggers.
+      - Ocean current forces (?).
+  - Player animation controller is now its own component which connects to an animation tree:
+    - Will also connect to blendshapes.
+    - Note: Originally, an additive animation layer was added to the tree but it was rmeoved because the rotations when exporting from Blender were causing problems.
+- Improvements to the camera controller:
+  - Now support for rotations Observation Mode (via new CameraRotation component):
+    - A new intermediate object between the tracker transform and the camera is created at runtime to handle rotations exclusively.
+    - Note: Rotation tracker is incomplete, original tracker objecy still handles most rotations.
+  - Works with touch input (one-finger drag) as well as mouse/trackpad panning.
+- Started working on a SO to bake animation curves into shaders for texture sampling (BakeShaderCurve.cs):
+  - Currently works but has problems with read/write beign enabled/disabled and is not an SO.
+  - Will be renamed and moved later.
+- Added a new particle system for underwater god rays:
+  - Shader now uses the same world space displacement function as the ocean surface for culling fragments above the water surface.
+  - Issue where vertical billboards can not have a rotation offset, so instead quads are used that rotate to face the camera (on the y axis only).
+- Added a new water surface tile prefab with better mesh LODs.
+- Prformance debugging is now done in DisplayPerformanceMetrics, which draws data using OnGUI:
+  - Still uses Components.PerformanceMetrics internally (which has been overhauled).
+  - Sample counts and update speeds can be adjusted.
+- Updates to Utilities;
+  - Draw can be used for adding and styling labels in OnGUI() instead of creating a new UI document.
+  - Format/Math now has some Vector2 methods.
+- Major project cleanup/reorganization:
+  - Removed TextMeshPro package completely, as it no longer has any dependencies in the project.
+  - Updated README/thumbnails.
+  - Skybox materials/textures are moved to the proper folders.
+  - DynamicCamera is now an individual prefab with empty children for each feature (children are no longer their own prefabs).
+  - Many old scripts/shaders were deleted, including:
+    - Gerstner wave graphs/subgraphs.
+    - Old sine wave graphs/subgraphs.
+  - ScriptableAssets are now in their own folder which also contains built in Scriptables like RenderFeatures.
+  - Player scripts/prefabs were temporarily moved into their own Player folder:
+    - May stay this way if the project template is changed.
+  - Removed residual exported animations from the player model.
+  - PerformanceMetrics, FrameRateCalculator, and PerformanceController are renamed and migrated to Components.Performance (a new namespace).
+  - Added more namespace fixes and class documentation.
+- Note: The v0.6.4 commit also contains some changes that were originally meant to be in v0.6.3, due to an issue with amending the v0.6.3 commit.
 
 ## Version 0.6.3
 ### Published on July 26, 2023
@@ -43,6 +83,8 @@ Planned:
   - Automatically sets the frame rate based on the device type (60 FPS on mobile, unlocked FPS otherwise).
     - Currently only checks Application.isMobilePlatform.
     - Planned check for ProMotion on newer iPad/MacBook Pro models.
+- VirtualMatrixAlias is now MatrixAlias under Components.Virtual.
+- Water surface planes are now linked to the water settings SO for automatic positioning.
 
 ## Version 0.6.2
 ### Published on July 25, 2023
@@ -571,7 +613,7 @@ Planned:
 - Added a shader to cover all points below a gradient:
   - Will be used for a future water line at the water surface.
 
-# Version 0.1
+# Project Creation
 ### Project created on May 18, 2023
 ![](https://raw.githubusercontent.com/rvishwajith/Descent/main/Thumbnails/thumbnail.png)
 - Created the repository and Unity project:
